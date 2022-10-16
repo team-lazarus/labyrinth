@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://weapons/bullets/bullet.tscn" type="PackedScene" id=1]
+[ext_resource path="res://weapons/bullets/3/shotgun_bullet/shotgun_bullet.gd" type="Script" id=2]
+[ext_resource path="res://sprites/weapons/bullets/shotgun/shotgun_bullet.png" type="Texture" id=3]
+
+[node name="bullet" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+MAX_DISTANCE = 350
+speed = 200
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 3 )

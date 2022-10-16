@@ -1,0 +1,326 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://sprites/Hostiles/wheel_bot/wheel_bot.png" type="Texture" id=2]
+[ext_resource path="res://shaders/flash.shader" type="Shader" id=3]
+[ext_resource path="res://characters/Hostiles/hostile.gd" type="Script" id=4]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 3 )
+shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/flash_modifier = 0.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 50.0
+
+[sub_resource type="Animation" id=3]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite:flip_h")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+
+[sub_resource type="CapsuleShape2D" id=7]
+radius = 46.6667
+height = 4.0
+
+[node name="wheel_bot" type="KinematicBody2D" groups=[
+"hostile",
+]]
+scale = Vector2( 0.64, 0.64 )
+collision_layer = 2
+collision_mask = 27
+script = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 1 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle = SubResource( 3 )
+anims/move = SubResource( 4 )
+anims/shoot = SubResource( 5 )
+anims/wake = SubResource( 6 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="hitbox" type="Area2D" parent="." groups=[
+"hostile",
+]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource( 7 )
+
+[node name="0" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="1" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="2" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="3" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="4" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="5" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="6" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="7" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="8" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="9" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="10" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="11" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="12" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="13" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="14" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="15" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="16" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="17" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="18" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="19" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="20" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="21" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="22" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="23" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="24" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="25" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="26" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="27" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="28" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="29" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="30" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="31" type="RayCast2D" parent="."]
+scale = Vector2( 5, 5 )
+enabled = true
+collision_mask = 63
+
+[node name="flashTimer" type="Timer" parent="."]
+wait_time = 0.2
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="flashTimer" to="." method="_on_flashTimer_timeout"]

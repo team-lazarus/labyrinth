@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://furniture/door.tscn" type="PackedScene" id=1]
+[ext_resource path="res://rooms/generation/level.gd" type="Script" id=3]
+
+[node name="level" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="backdoor" parent="." instance=ExtResource( 1 )]
+position = Vector2( 8, 56 )
+
+[node name="spawnpoints" type="Node2D" parent="."]
+
+[node name="doorpoints" type="Node2D" parent="."]
+
+[node name="0" type="Position2D" parent="doorpoints"]
+
+[node name="1" type="Position2D" parent="doorpoints"]
+
+[node name="2" type="Position2D" parent="doorpoints"]
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="loot" type="Position2D" parent="."]

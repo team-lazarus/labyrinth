@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://passive/passive.tscn" type="PackedScene" id=1]
+[ext_resource path="res://passive/3/electron_accelrator.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+resource_local_to_scene = true
+radius = 1.0
+
+[node name="Node2D" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="area_of_effect" index="0"]
+shape = SubResource( 1 )

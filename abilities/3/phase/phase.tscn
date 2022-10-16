@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://abilities/3/phase/phase.gd" type="Script" id=1]
+[ext_resource path="res://abilities/ability.tscn" type="PackedScene" id=2]
+
+[node name="Node2D" instance=ExtResource( 2 )]
+script = ExtResource( 1 )

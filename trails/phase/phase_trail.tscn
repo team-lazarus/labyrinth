@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://trails/phase/phase_trail.gd" type="Script" id=1]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0, 0, 0, 0, 0.803922, 0, 1, 1 )
+
+[node name="phase_trail" type="Line2D"]
+width = 15.0
+default_color = Color( 0.803922, 0, 1, 1 )
+gradient = SubResource( 1 )
+script = ExtResource( 1 )
+trailLength = 10

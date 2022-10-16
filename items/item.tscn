@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://items/item.gd" type="Script" id=1]
+[ext_resource path="res://sprites/items/health.png" type="Texture" id=2]
+[ext_resource path="res://furniture/light.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 5.65685
+height = 15.5713
+
+[sub_resource type="Animation" id=2]
+resource_name = "toggle"
+length = 0.6
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 60.5348
+
+[node name="health" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 9
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+vframes = 3
+frame = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -1.65178, 2.12371 )
+rotation = 0.785398
+shape = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/toggle = SubResource( 2 )
+
+[node name="AOE" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AOE"]
+shape = SubResource( 4 )
+
+[node name="Light2D" parent="." instance=ExtResource( 3 )]
+texture_scale = 1.0
+color = Color( 1, 0.00784314, 0.00784314, 1 )
+energy = 0.5
+[connection signal="body_entered" from="AOE" to="." method="_on_AOE_body_entered"]

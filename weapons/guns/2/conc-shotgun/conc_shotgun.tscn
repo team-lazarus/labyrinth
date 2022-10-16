@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://weapons/guns/gun.tscn" type="PackedScene" id=1]
+[ext_resource path="res://shaders/flash.shader" type="Shader" id=2]
+[ext_resource path="res://sprites/weapons/guns/conc-shotgun/shotgun.png" type="Texture" id=3]
+[ext_resource path="res://weapons/guns/2/conc-shotgun/conc_shotgun.gd" type="Script" id=4]
+[ext_resource path="res://weapons/bullets/2/conc_shotgun_bullet/conc_shotgun_bullet.tscn" type="PackedScene" id=5]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 2 )
+shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/flash_modifier = 0.0
+
+[node name="weapon" instance=ExtResource( 1 )]
+script = ExtResource( 4 )
+Bullet = ExtResource( 5 )
+
+[node name="Sprite" parent="muzzle" index="0"]
+material = SubResource( 1 )
+position = Vector2( -0.138494, 0.270857 )
+texture = ExtResource( 3 )
+
+[node name="bullet_exit" parent="muzzle" index="1"]
+visible = false
+position = Vector2( 23.4475, -12.2458 )
+rotation = -0.785398
+
+[node name="bullet_exits" type="Node2D" parent="muzzle" index="2"]
+
+[node name="Position2D" type="Position2D" parent="muzzle/bullet_exits" index="0"]
+position = Vector2( 13.2506, -6.77452 )
+rotation = -0.349066
+
+[node name="Position2D2" type="Position2D" parent="muzzle/bullet_exits" index="1"]
+position = Vector2( 13.2407, -4.8922 )
+rotation = -0.174533
+
+[node name="Position2D5" type="Position2D" parent="muzzle/bullet_exits" index="2"]
+position = Vector2( 13.8007, -3.16119 )
+
+[node name="Position2D4" type="Position2D" parent="muzzle/bullet_exits" index="3"]
+position = Vector2( 13.3571, -0.341939 )
+rotation = 0.174533
+
+[node name="Position2D3" type="Position2D" parent="muzzle/bullet_exits" index="4"]
+position = Vector2( 13.1888, 2.02625 )
+rotation = 0.349066
+
+[node name="shoot_sound" parent="." index="4"]
+pitch_scale = 5.0

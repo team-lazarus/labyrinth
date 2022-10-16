@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://weapons/bullets/bullet.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/weapons/bullets/flare.png" type="Texture" id=2]
+[ext_resource path="res://sprites/light/light_flare.png" type="Texture" id=3]
+[ext_resource path="res://weapons/bullets/flare/flare.gd" type="Script" id=4]
+
+[node name="bullet" instance=ExtResource( 1 )]
+script = ExtResource( 4 )
+
+[node name="Sprite" parent="." index="0"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+scale = Vector2( 4, 4 )
+
+[node name="Light2D" type="Light2D" parent="." index="2"]
+texture = ExtResource( 3 )
+color = Color( 1, 0, 0, 1 )

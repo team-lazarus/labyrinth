@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://sprites/UI/item_frame.png" type="Texture" id=1]
+[ext_resource path="res://UI/Inventory/Inventory.gd" type="Script" id=2]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0, 0, 0, 0.490196, 0, 0, 0, 0.490196 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 117, 117 )
+margin_left = 2.86408
+margin_right = 3.05129
+
+[sub_resource type="DynamicFontData" id=4]
+font_path = "res://fonts/retroFont.ttf"
+
+[sub_resource type="DynamicFont" id=5]
+size = 50
+font_data = SubResource( 4 )
+
+[node name="Inventory" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+margin_right = 2048.0
+margin_bottom = 542.0
+texture = SubResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 860.0
+margin_bottom = 440.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Control/MarginContainer"]
+margin_right = 850.0
+margin_bottom = 430.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="name" type="Label" parent="Control/MarginContainer/Panel"]
+margin_top = 34.0356
+margin_right = 853.0
+margin_bottom = 86.0356
+custom_fonts/font = SubResource( 5 )
+text = "Inventory"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/Panel"]
+margin_left = 41.0
+margin_top = 83.0
+margin_right = 815.0
+margin_bottom = 403.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="abilities" type="VBoxContainer" parent="Control/MarginContainer/Panel/HBoxContainer"]
+margin_right = 385.0
+margin_bottom = 320.0
+size_flags_horizontal = 3
+
+[node name="items" type="VBoxContainer" parent="Control/MarginContainer/Panel/HBoxContainer"]
+margin_left = 389.0
+margin_right = 774.0
+margin_bottom = 320.0
+size_flags_horizontal = 3
