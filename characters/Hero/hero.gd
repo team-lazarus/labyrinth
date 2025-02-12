@@ -80,8 +80,7 @@ func _process(_delta):
 	elif health > MAX_HEALTH:
 		health = MAX_HEALTH
 	
-	if mouse_left_down:
-		shoot()
+	manage_shooting()
 	
 	for itr in range(progress_bars.size()):
 		var progress_bar = progress_bars[itr]
@@ -95,6 +94,12 @@ func _process(_delta):
 			
 			progress_bar.hide()
 			break
+
+func manage_shooting():
+	if current_state == State.DISARMED:
+		return
+	if Input.is_key_pressed(KEY_RIGHT):
+		shoot(0)
 
 func _physics_process(delta):
 	get_player_velocity(delta)
@@ -145,17 +150,8 @@ func get_input_vector ():
 
 func _input(event):
 	if current_state != State.STUNNED:
-		if current_state != State.DISARMED:
-			handle_shooting(event)
 		if current_state != State.MUTED:
 			handle_items_and_abilities()
-
-func handle_shooting(event):
-	if event is InputEventMouseButton:
-		if event.button_index == 1 and event.is_pressed():
-			mouse_left_down = true
-		elif event.button_index == 1 and not event.is_pressed():
-			mouse_left_down = false
 
 func handle_items_and_abilities():
 	if Input.is_key_pressed(KEY_Q):
@@ -174,10 +170,9 @@ func replace_passive(new_passive):
 	passive.on_remove()
 	passive = load(new_passive).instance()
 
-func shoot():
+func shoot(direction: float):
 	if ($weapon.state == $weapon.State.READY):
 		$weapon.shoot()
-		
 
 func deal_damage (dmg) :
 	dmg = passive.on_get_hit(dmg)

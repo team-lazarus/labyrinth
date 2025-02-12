@@ -10,7 +10,6 @@ config_version=4
 
 _global_script_classes=[  ]
 _global_script_class_icons={
-
 }
 
 [application]
@@ -58,20 +57,21 @@ texture={
 [layer_names]
 
 2d_render/layer_1="hero"
-2d_physics/layer_1="hero"
 2d_render/layer_2="hostile"
-2d_physics/layer_2="hostile"
 2d_render/layer_3="items"
-2d_physics/layer_3="items"
 2d_render/layer_4="wall"
-2d_physics/layer_4="wall"
 2d_render/layer_5="projectiles"
-2d_physics/layer_5="projectiles"
 2d_render/layer_6="phased"
+2d_physics/layer_1="hero"
+2d_physics/layer_2="hostile"
+2d_physics/layer_3="items"
+2d_physics/layer_4="wall"
+2d_physics/layer_5="projectiles"
 2d_physics/layer_6="phased"
 
 [rendering]
 
-quality/2d/use_pixel_snap=true
+2d/snapping/use_gpu_pixel_snap=true
 environment/default_clear_color=Color( 0.0941176, 0.0784314, 0.145098, 1 )
 environment/default_environment="res://default_env.tres"
+quality/2d/use_pixel_snap=true

@@ -24,7 +24,8 @@ func _on_bullet_area_entered(area):
 		var body = area.get_owner()
 		if body.is_in_group(hostile_group):
 			if friendly_group == "hero":
-				user.passive.on_enemy_hit()
+				pass
+				#user.passive.on_enemy_hit()
 			body.deal_damage(damage)
 		elif body.is_in_group(friendly_group):
 			return

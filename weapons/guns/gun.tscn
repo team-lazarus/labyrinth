@@ -160,5 +160,6 @@ stream = ExtResource( 3 )
 volume_db = -10.0
 pitch_scale = 3.0
 max_distance = 1000.0
+
 [connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]
 [connection signal="timeout" from="shoot_delay" to="." method="_on_shoot_delay_timeout"]

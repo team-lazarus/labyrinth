@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/phaser.mp3-0b52116799f13f3b21efff34cec2a5d4.mp3str"
+
+[deps]
+
+source_file="res://music/phaser.mp3"
+dest_files=[ "res://.import/phaser.mp3-0b52116799f13f3b21efff34cec2a5d4.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -8,7 +8,7 @@
 [ext_resource path="res://rooms/tutorial/shootingRoom.gd" type="Script" id=6]
 
 [node name="shootingRoom" type="Node2D"]
-position = Vector2( -440, -472 )
+position = Vector2( -440, -473 )
 script = ExtResource( 6 )
 
 [node name="TileMap" parent="." instance=ExtResource( 1 )]

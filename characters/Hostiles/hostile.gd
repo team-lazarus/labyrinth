@@ -13,7 +13,7 @@ var MAXIMUM_BOT_VELOCITY = 100
 const BOT_ACCELRATION = 500
 const RAY_CAST_LENGTH = 50
 const HERO_DISTANCE = 200
-const MAX_HEALTH = 15
+const MAX_HEALTH = 4
 
 var current_state = State.SLEEP
 var hero_shootable = false
@@ -133,7 +133,7 @@ func _on_flashTimer_timeout():
 	$weapon/muzzle/Sprite.material.set_shader_param("flash_modifier",0)
 
 func die ():
-	hero	.passive.on_enemy_death()
+	hero.passive.on_enemy_death()
 	queue_free()
 
 

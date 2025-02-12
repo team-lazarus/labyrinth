@@ -25,41 +25,33 @@ position = Vector2( 0, -256 )
 [node name="StaticBody2D" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 1112, -352 )
 rotation = 1.01264
-scale = Vector2( 1.33, 1.33 )
 
 [node name="StaticBody2D2" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 1056, 96 )
 rotation = 3.18899
-scale = Vector2( 1.33, 1.33 )
 
 [node name="StaticBody2D8" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( -520, -416 )
 rotation = 2.07589
-scale = Vector2( 1.33, 1.33 )
 
 [node name="StaticBody2D9" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( -384, -296 )
 rotation = 2.07589
-scale = Vector2( 1.33, 1.33 )
 
 [node name="StaticBody2D10" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( -840, -440 )
 rotation = 2.07589
-scale = Vector2( 1.33, 1.33 )
 
 [node name="StaticBody2D11" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( -768, 304 )
 rotation = 4.11653
-scale = Vector2( 1.33, 1.33 )
 
 [node name="StaticBody2D12" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 0, 352 )
-scale = Vector2( 1.33, 1.33 )
 
 [node name="StaticBody2D3" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 672, 352 )
 rotation = 3.18899
-scale = Vector2( 1.33, 1.33 )
 
 [node name="StaticBody2D4" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 864, -56 )

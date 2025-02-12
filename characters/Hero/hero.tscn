@@ -192,9 +192,7 @@ start_node = "Idle"
 radius = 24.2864
 height = 46.3606
 
-[node name="hero" type="KinematicBody2D" groups=[
-"hero",
-]]
+[node name="hero" type="KinematicBody2D" groups=["hero"]]
 collision_mask = 30
 script = ExtResource( 2 )
 
@@ -208,9 +206,8 @@ position = Vector2( 4.8, -32.5333 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 3 )
 flip_h = true
-vframes = 10
 hframes = 10
-frame = 2
+vframes = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 4.8, 16 )
@@ -241,9 +238,7 @@ texture = ExtResource( 4 )
 texture_scale = 3.0
 energy = 0.8
 
-[node name="hitbox" type="Area2D" parent="." groups=[
-"hero",
-]]
+[node name="hitbox" type="Area2D" parent="." groups=["hero"]]
 position = Vector2( 4.8, 31.4667 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
