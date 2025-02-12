@@ -98,8 +98,19 @@ func _process(_delta):
 func manage_shooting():
 	if current_state == State.DISARMED:
 		return
+	if not(Input.is_key_pressed(KEY_RIGHT) or Input.is_key_pressed(KEY_UP) or Input.is_key_pressed(KEY_LEFT) or Input.is_key_pressed(KEY_DOWN)):
+		return
+	var direction_vector = Vector2.ZERO
+	
 	if Input.is_key_pressed(KEY_RIGHT):
-		shoot(0)
+		direction_vector += Vector2(1, 0)
+	if Input.is_key_pressed(KEY_LEFT):
+		direction_vector += Vector2(-1,0)
+	if Input.is_key_pressed(KEY_UP):
+		direction_vector += Vector2(0,-1)
+	if Input.is_key_pressed(KEY_DOWN):
+		direction_vector += Vector2(0,1)
+	shoot(direction_vector.angle())
 
 func _physics_process(delta):
 	get_player_velocity(delta)
@@ -172,7 +183,8 @@ func replace_passive(new_passive):
 
 func shoot(direction: float):
 	if ($weapon.state == $weapon.State.READY):
-		$weapon.shoot()
+		$weapon.shoot_at(direction)
+		
 
 func deal_damage (dmg) :
 	dmg = passive.on_get_hit(dmg)

@@ -1,10 +1,10 @@
 extends "res://weapons/guns/gun.gd"
 
 func _ready():
-	BULLET_INTERVAL = 0.2
-	COOLDOWN = 0.2
+	BULLET_INTERVAL = 0.1
+	COOLDOWN = 0.1
 	MAX_BULLETS_FIRED = 1
-	ATTACK_ANIMATION = 0.2
+	ATTACK_ANIMATION = 0.1
 	
 	ATTACK_ANIMATION = $AnimationPlayer.get_animation("charge").length
 	

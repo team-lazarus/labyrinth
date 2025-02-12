@@ -33,8 +33,6 @@ func _physics_process(delta):
 	if ready:
 		if follow != null:
 			$muzzle.look_at(follow.global_position)
-		else:
-			$muzzle.look_at(get_global_mouse_position())
 
 func shoot():
 	if state == State.READY:
@@ -43,6 +41,12 @@ func shoot():
 		$shoot_delay.start()
 		$shoot_sound.play()
 		# $AnimationPlayer.play("charge")
+
+func shoot_at(angle: float):
+	$muzzle.transform = Transform2D(angle, $muzzle.transform.get_origin())
+	print($muzzle.transform)
+	print(angle)
+	shoot()
 
 func create_bullet():
 	var b = summon_bullet()
