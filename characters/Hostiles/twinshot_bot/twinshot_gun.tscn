@@ -31,4 +31,5 @@ one_shot = true
 volume_db = -6.0
 pitch_scale = 0.5
 max_distance = 600.0
+
 [connection signal="timeout" from="bullet_interval" to="." method="_on_bullet_interval_timeout"]

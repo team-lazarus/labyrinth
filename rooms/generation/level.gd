@@ -8,7 +8,7 @@ var text_script = null
 var wave_strength = 2
 var wave_strength_increment = 1
 
-var total_waves = 3
+var total_waves = 1
 var num_of_waves = 0
 
 var create_new_wave = true
@@ -37,7 +37,8 @@ var loot_generation_probability = 0.2
 var viable_enemies = [
 	"res://characters/Hostiles/wheel_bot/wheel_bot.tscn",
 	"res://characters/Hostiles/twinshot_bot/twinshot_bot.tscn",
-	"res://characters/Hostiles/gatling_bot/gatling_bot.tscn"
+	"res://characters/Hostiles/gatling_bot/gatling_bot.tscn",
+	"res://characters/Hostiles/shotgun_bot/shotgun_bot.tscn"
 	]
 
 onready var spawnpoints = $spawnpoints.get_children()
