@@ -7,7 +7,7 @@ A roguelike game built in Godot 3.5 to train adversarial reinforcement learning 
 - **Godot 3.5 Engine**: Lightweight and easy to extend.
 
 ## Requirements
-- [Godot 3.5 (Stable)](https://godotengine.org/download/)
+- [Godot 3.5 (Stable)](https://godotengine.org/download/archive/3.5-stable/)
 
 ## Setup
 1. **Install Godot 3.5** if not already installed.
