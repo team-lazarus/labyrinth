@@ -126,9 +126,7 @@ tracks/0/keys = {
 radius = 46.6667
 height = 4.0
 
-[node name="wheel_bot" type="KinematicBody2D" groups=[
-"hostile",
-]]
+[node name="wheel_bot" type="KinematicBody2D" groups=["hostile"]]
 scale = Vector2( 0.64, 0.64 )
 collision_layer = 2
 collision_mask = 27
@@ -152,9 +150,7 @@ anims/wake = SubResource( 6 )
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
-[node name="hitbox" type="Area2D" parent="." groups=[
-"hostile",
-]]
+[node name="hitbox" type="Area2D" parent="." groups=["hostile"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource( 7 )
@@ -321,6 +317,7 @@ collision_mask = 63
 
 [node name="flashTimer" type="Timer" parent="."]
 wait_time = 0.2
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="flashTimer" to="." method="_on_flashTimer_timeout"]

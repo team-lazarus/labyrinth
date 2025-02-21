@@ -19,7 +19,9 @@ var initial_elements
 
 var bullets = []
 var doors = []
+var enemies = []
 
+onready var backdoor = $backdoor
 var loot_crate = preload("res://furniture/loot_crate.tscn").instance()
 
 # weights are indexed like this
@@ -103,6 +105,7 @@ func create_new_wave():
 		if enemy.strength <= (wave_strength - current_wave_strength):
 			print("enemy str",enemy.strength)
 			print("delta wave str",wave_strength - current_wave_strength)
+			enemies.append(enemy)
 			$YSort.add_child(enemy)
 		
 			enemy.wake(hero)

@@ -10,3 +10,5 @@ func _ready():
 	MAX_DISTANCE = 100
 	spawn_position = global_position
 	speed = 33
+	
+	bullet_type = "flare_bullet"

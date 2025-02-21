@@ -8,3 +8,7 @@ onready var hero = $YSort/hero
 var text_script = null
 
 var bullets = []
+var doors = []
+var enemies = []
+
+var backdoor = false

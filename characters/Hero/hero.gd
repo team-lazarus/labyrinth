@@ -52,6 +52,9 @@ var items = []
 var progress_bars = []
 var timers = []
 
+var agent = true
+var agent_direction_vector = Vector2.ZERO
+
 func _ready():
 	if get_node("passive") == null:
 		passive = DEFAULT_PASSIVE.instance()
@@ -98,6 +101,10 @@ func _process(_delta):
 func manage_shooting():
 	if current_state == State.DISARMED:
 		return
+	if agent:
+		if agent_direction_vector != Vector2.ZERO:
+			shoot(agent_direction_vector.angle())
+		return
 	if not(Input.is_key_pressed(KEY_RIGHT) or Input.is_key_pressed(KEY_UP) or Input.is_key_pressed(KEY_LEFT) or Input.is_key_pressed(KEY_DOWN)):
 		return
 	var direction_vector = Vector2.ZERO
@@ -119,7 +126,8 @@ func _physics_process(delta):
 	apply_impulse()
 
 func get_player_velocity (delta):
-	get_input_vector()
+	if not agent:
+		get_input_vector()
 	input_vector = input_vector.normalized()
 
 	# decide_and_play_animation(input_vector)
@@ -160,6 +168,11 @@ func get_input_vector ():
 	input_vector = vel
 
 func _input(event):
+	if event is InputEventKey:
+		if event.pressed:
+			var character: String = OS.get_scancode_string(event.scancode)
+			print("Pressed " + character)
+	
 	if current_state != State.STUNNED:
 		if current_state != State.MUTED:
 			handle_items_and_abilities()

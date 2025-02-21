@@ -1,6 +1,8 @@
 extends "res://characters/Hostiles/hostile.gd"
 
 func _ready():
+	enemy_type = "wheel_bot"
+	
 	rays.resize(num_rays)
 	for itr in range(num_rays):
 		var path = str(itr)

@@ -8,6 +8,8 @@ extends "res://characters/Hostiles/hostile.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	enemy_type = "gatling_bot"
+	
 	rays.resize(num_rays)
 	for itr in range(num_rays):
 		var path = str(itr)

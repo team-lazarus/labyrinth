@@ -5,7 +5,7 @@ extends StaticBody2D
 
 var ROOT
 
-onready var Interactor = $interaction
+onready var interactor = $interaction
 var TextBox = preload("res://UI/Textbox/TextBox.tscn")
 
 var room
@@ -14,7 +14,6 @@ var spawn_loc = Vector2.ZERO
 var locked = false
 
 func _physics_process(delta):
-	
 	if hero == null and self.name != "backdoor":
 		if get_parent().next_scene != null:
 			room = load(get_parent().next_scene).instance()
@@ -22,7 +21,7 @@ func _physics_process(delta):
 			hero = get_parent().hero
 
 func _input(event):
-	var bodies = Interactor.get_overlapping_bodies()
+	var bodies = interactor.get_overlapping_bodies()
 	for body in bodies :
 		if (body.get_groups().has("hero")):
 			if Input.is_key_pressed(KEY_E) and event is InputEventKey and ! locked:
@@ -40,6 +39,7 @@ func render_room():
 	if get_parent().next_next_scene != null:
 		room.next_scene = get_parent().next_next_scene
 	
+	room.name = "level"
 	get_parent().get_parent().add_child(room)
 	
 	get_parent().get_node("YSort").remove_child(hero)

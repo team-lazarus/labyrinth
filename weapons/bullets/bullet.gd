@@ -11,6 +11,8 @@ var spawn_position
 var user
 export var speed = 150
 
+export var bullet_type = "standard_bullet"
+
 func _ready():
 	spawn_position = global_position
 	

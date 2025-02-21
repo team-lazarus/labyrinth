@@ -23,6 +23,7 @@ var hostile_group = "hero"
 var friendly_group = "hostile"
 var health = 10
 var strength = 1
+var bot_direction = Vector2.ZERO
 
 # context based steering
 var rays = []
@@ -36,6 +37,8 @@ var acceleration = Vector2.ZERO
 var init_done = false
 
 var modifiers = []
+
+var enemy_type = ""
 
 func _ready():
 	rays.resize(num_rays)
@@ -88,6 +91,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 func follow(delta):
 	var direction = raycast_check()
+	bot_direction = direction
 	velocity += direction * BOT_ACCELRATION * delta
 	velocity = velocity.clamped(MAXIMUM_BOT_VELOCITY)
 	
@@ -135,7 +139,6 @@ func _on_flashTimer_timeout():
 func die ():
 	hero.passive.on_enemy_death()
 	queue_free()
-
 
 func _on_Timer_timeout():
 	hero = $weapon.follow

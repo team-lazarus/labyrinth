@@ -16,12 +16,13 @@ func make_rotated_bullet(theta: float):
 	b.friendly_group = friendly_group
 	b.global_transform = $muzzle.global_transform
 	b.transform = b.transform.rotated(theta)	
+	b.transform = b.transform.scaled(Vector2.ONE*0.8)
 	b.position = $muzzle/bullet_exit.global_position
 	b.user = get_parent()
 
 	return b
 
 func create_bullet():
-	var angles = [-PI/6,0,PI/6]
+	var angles = [-3*PI/24,-PI/24,PI/24, 3*PI/24]
 	for angle in angles:
 		get_tree().root.get_child(0).add_child(make_rotated_bullet(angle))
