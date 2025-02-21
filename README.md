@@ -1,4 +1,4 @@
-# Labrynth
+# Labyrinth
 A roguelike game built in Godot 3.5 to train adversarial reinforcement learning (RL) agents—Daedalus and Theseus. Designed for AI experimentation and adversarial agent training.
 
 ## Features
@@ -20,14 +20,14 @@ A roguelike game built in Godot 3.5 to train adversarial reinforcement learning 
    - Press `F5` or click the `Run` button in the UI.
 
 ## Running the RL Agent
-1. Clone and set up the [Theseus repository](https://github.com/team-lazarus/thesus):
+1. Clone and set up the [Theseus repository](https://github.com/team-lazarus/theseus):
    ```sh
-   git clone https://github.com/team-lazarus/thesus.git
-   cd thesus
-   # Follow the setup instructions in the Thesus repository
+   git clone https://github.com/team-lazarus/theseus.git
+   cd theseus
+   # Follow the setup instructions in the Theseus repository
    ```
-2. Start **Labrynth** first.
-3. Run the **Thesus** agent.
+2. Start **Labyrinth** first.
+3. Run the **Theseus** agent.
 4. Observe the AI making random movements within the game.
 
 ## Contribution Guidelines
@@ -38,4 +38,5 @@ A roguelike game built in Godot 3.5 to train adversarial reinforcement learning 
 ---
 
 _"Through the labyrinth, we train our minds."_ 🌀
+
 
