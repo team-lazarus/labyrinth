@@ -29,7 +29,6 @@ func handle_client_request(peer_index = 0):
 		action = read_from_client(peer_index)
 		if action:
 			execute_actions(action)
-			print("[INFO] Executing action " + action)
 
 func write_to_client(data, peer_index = 0):
 	if peer_index < peer_connections.size():
@@ -102,7 +101,7 @@ func extract_state_from_node(node):
 			continue
 		bullet_data.append({
 			"position" : [bullet.position.x, bullet.position.y],
-			"direction" : [bullet.get_rotation()],
+			"direction" : bullet.get_rotation(),
 			"type" : bullet.bullet_type
 		 })
 	
@@ -112,29 +111,27 @@ func extract_state_from_node(node):
 			continue
 		var w = door.interactor.get_child(0).shape.get_extents().x
 		var h = door.interactor.get_child(0).shape.get_extents().y
-		door_data.append({
-			"bounding_box" : [
+		door_data.append(
+			[
 				door.interactor.global_position.x - w/2,
 				door.interactor.global_position.y - h/2,
 				door.interactor.global_position.x + w/2,
 				door.interactor.global_position.y + h/2,
 			]
 			# x_1, y_1, x_2, y_2
-		})
+		)
 	var backdoor_data = null
 	if node.backdoor:
 		var backdoor = node.backdoor
 		var w = backdoor.interactor.get_child(0).shape.get_extents().x
 		var h = backdoor.interactor.get_child(0).shape.get_extents().y
-		backdoor_data = {
-				"bounding_box" : [
+		backdoor_data =  [
 					backdoor.interactor.global_position.x - w/2,
 					backdoor.interactor.global_position.y - h/2,
 					backdoor.interactor.global_position.x + w/2,
 					backdoor.interactor.global_position.y + h/2,
 				]
 				# x_1, y_1, x_2, y_2
-			}
 	var enemy_data = []
 	for enemy in node.enemies:
 		enemy_data.append({
@@ -147,44 +144,64 @@ func extract_state_from_node(node):
 		"hero" : {
 			"position": [node.hero.position.x, node.hero.position.y],
 			"health" : node.hero.health,
-			"phase_ready" : false, #TODO: check if phase is ready
-			"ability_ready" : false #TODO: check if ability is ready
+			"phase_cooldown" : 0.0, #TODO: check if phase is ready
+			"ability_cooldown" : 0.0 #TODO: check if ability is ready
+			"shoot_cooldown" : 0.0 #TODO: check if ability is ready
 		},
 		"bullets" : bullet_data,
 		"doors" : door_data,
 		"enemy" : enemy_data,
-		"backdoor" : backdoor_data
+		"backdoor" : backdoor_data,
+		"walls" : []
 	}
 
 func execute_actions(response):
 	var parse_result = JSON.parse(response)
 	if parse_result.error == OK:
 		var actions = parse_result.result
-		print(actions)
 		reset_hero()
 		move_hero(actions[0])
 		shoot_hero(actions[1])
 
 func reset_hero():
+	current_level.hero.agent = true	
 	current_level.hero.input_vector = Vector2.ZERO
 	current_level.hero.agent_direction_vector = Vector2.ZERO
 
 func move_hero(action):
 	if action == 1:
-		current_level.hero.input_vector += Vector2.UP
+		current_level.hero.input_vector = Vector2.UP
 	if action == 2:
-		current_level.hero.input_vector += Vector2.RIGHT
+		current_level.hero.input_vector = Vector2.RIGHT
 	if action == 3:
-		current_level.hero.input_vector += Vector2.DOWN
+		current_level.hero.input_vector = Vector2.DOWN
 	if action == 4:
-		current_level.hero.input_vector += Vector2.LEFT
+		current_level.hero.input_vector = Vector2.LEFT
+	
+	if action == 5:
+		current_level.hero.input_vector = Vector2.RIGHT+Vector2.UP
+	if action == 6:
+		current_level.hero.input_vector = Vector2.RIGHT+Vector2.DOWN
+	if action == 7:
+		current_level.hero.input_vector = Vector2.LEFT+Vector2.DOWN
+	if action == 8:
+		current_level.hero.input_vector = Vector2.LEFT+Vector2.UP
 
 func shoot_hero(action):
 	if action == 1:
-		current_level.hero.agent_direction_vector += Vector2.UP
+		current_level.hero.agent_direction_vector = Vector2.UP
 	if action == 2:
-		current_level.hero.agent_direction_vector += Vector2.RIGHT
+		current_level.hero.agent_direction_vector = Vector2.RIGHT
 	if action == 3:
-		current_level.hero.agent_direction_vector += Vector2.DOWN
+		current_level.hero.agent_direction_vector = Vector2.DOWN
 	if action == 4:
-		current_level.hero.agent_direction_vector += Vector2.LEFT
+		current_level.hero.agent_direction_vector = Vector2.LEFT
+	
+	if action == 5:
+		current_level.hero.agent_direction_vector = Vector2.RIGHT+Vector2.UP
+	if action == 6:
+		current_level.hero.agent_direction_vector = Vector2.RIGHT+Vector2.DOWN
+	if action == 7:
+		current_level.hero.agent_direction_vector = Vector2.LEFT+Vector2.DOWN
+	if action == 8:
+		current_level.hero.agent_direction_vector = Vector2.LEFT+Vector2.UP

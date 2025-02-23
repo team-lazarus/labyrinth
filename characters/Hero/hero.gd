@@ -52,7 +52,7 @@ var items = []
 var progress_bars = []
 var timers = []
 
-var agent = true
+var agent = false
 var agent_direction_vector = Vector2.ZERO
 
 func _ready():
