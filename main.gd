@@ -133,6 +133,7 @@ func extract_state_from_node(node):
 				]
 				# x_1, y_1, x_2, y_2
 	var enemy_data = []
+	var rewards = node.hero.calculate_net_reward()
 	for enemy in node.enemies:
 		enemy_data.append({
 			"position" : [enemy.global_position.x, enemy.global_position.y],
@@ -141,11 +142,14 @@ func extract_state_from_node(node):
 			"type" : enemy.enemy_type
 		})
 	return {
+		"hero_reward" : rewards[0],
+		"gun_reward" : rewards[1],
+		"terminated" : false,
 		"hero" : {
 			"position": [node.hero.position.x, node.hero.position.y],
 			"health" : node.hero.health,
 			"phase_cooldown" : 0.0, #TODO: check if phase is ready
-			"ability_cooldown" : 0.0 #TODO: check if ability is ready
+			"ability_cooldown" : 0.0, #TODO: check if ability is ready
 			"shoot_cooldown" : 0.0 #TODO: check if ability is ready
 		},
 		"bullets" : bullet_data,

@@ -55,6 +55,20 @@ var timers = []
 var agent = false
 var agent_direction_vector = Vector2.ZERO
 
+# HERO_REWARD VALUE #
+const INCREASING_HEALTH_REWARD = 1
+const LINE_OF_SIGHT_REWARD = 1
+const OPENING_DOOR_REWARD = 2
+const ROOM_CLEAR_REWARD = 5
+const DECREASING_HEALTH_REWARD = -2
+# GUN_REWARD VALUES #
+const SHOOTING_ENEMY_REWARD = 1
+const KILLING_ENEMY_REWARD = 2
+######################
+
+var hero_reward = 0
+var gun_reward = 0
+
 func _ready():
 	if get_node("passive") == null:
 		passive = DEFAULT_PASSIVE.instance()
@@ -214,6 +228,13 @@ func heal(heal):
 	health += heal
 	if health > MAX_HEALTH:
 		health = MAX_HEALTH
+		heal = 0
+	
+	if heal < 0:
+		hero_reward += INCREASING_HEALTH_REWARD * heal
+	elif heal > 0:
+		hero_reward += DECREASING_HEALTH_REWARD * heal
+	
 	update_health_UI()
 	
 
@@ -246,3 +267,6 @@ func update_health_UI ():
 
 func die():
 	get_tree().change_scene("res://main.tscn")
+
+func calculate_net_reward():
+	return [hero_reward, gun_reward]
