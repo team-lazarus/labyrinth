@@ -1,38 +1,36 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://FloorTilesMap.tscn" type="PackedScene" id=1]
-[ext_resource path="res://furniture/doubleRedBed.tscn" type="PackedScene" id=2]
+[ext_resource path="res://characters/Hostiles/shotgun_bot/shotgun_bot.tscn" type="PackedScene" id=2]
 [ext_resource path="res://furniture/door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://rooms/tutorial/startingRoom.gd" type="Script" id=4]
 [ext_resource path="res://characters/Hero/hero.tscn" type="PackedScene" id=5]
 [ext_resource path="res://furniture/light.tscn" type="PackedScene" id=6]
-[ext_resource path="res://furniture/plant.tscn" type="PackedScene" id=7]
 
 [node name="startingRoom" type="Node2D"]
 script = ExtResource( 4 )
 
 [node name="TileMap" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, 128 )
-tile_data = PoolIntArray( -65537, 6, 0, -131072, 5, 0, -131071, 1, 0, -131070, 4, 0, -131069, 5, 0, -131066, 1, 0, -131065, 3, 0, -131064, 3, 0, -131063, 3, 0, -131062, 3, 0, -131061, 4, 0, -131060, 6, 0, -1, 6, 0, -65524, 6, 0, 65535, 6, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 6, 0, 131071, 6, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65546, 0, 0, 65547, 0, 0, 65548, 6, 0, 196607, 6, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 131082, 0, 0, 131083, 0, 0, 131084, 6, 0, 262143, 6, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 6, 0, 327679, 6, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 6, 0, 393215, 6, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327692, 6, 0, 458751, 6, 0, 393216, 0, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 6, 0, 524287, 6, 0, 458752, 6, 0, 458753, 6, 0, 458754, 6, 0, 458755, 6, 0, 458756, 6, 0, 458757, 6, 0, 458758, 6, 0, 458759, 6, 0, 458760, 6, 0, 458761, 6, 0, 458762, 6, 0, 458763, 6, 0, 458764, 6, 0 )
+position = Vector2( 320, 64 )
+tile_data = PoolIntArray( -4, 3, 0, -3, 0, 0, -2, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 3, 0, 65532, 3, 0, 65533, 2, 0, 65534, 2, 0, 65535, 2, 0, 0, 2, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 3, 0, 131068, 3, 0, 131069, 2, 0, 131070, 2, 0, 131071, 2, 0, 65536, 2, 0, 65537, 2, 0, 65538, 2, 0, 65539, 2, 0, 65540, 2, 0, 65541, 3, 0, 196604, 3, 0, 196605, 2, 0, 196606, 2, 0, 196607, 2, 0, 131072, 2, 0, 131073, 2, 0, 131074, 2, 0, 131075, 2, 0, 131076, 2, 0, 131077, 3, 0, 262140, 3, 0, 262141, 2, 0, 262142, 2, 0, 262143, 2, 0, 196608, 2, 0, 196609, 2, 0, 196610, 2, 0, 196611, 2, 0, 196612, 2, 0, 196613, 3, 0, 327676, 3, 0, 327677, 3, 0, 327678, 3, 0, 327679, 3, 0, 262144, 3, 0, 262145, 3, 0, 262146, 3, 0, 262147, 3, 0, 262148, 3, 0, 262149, 3, 0 )
 
 [node name="door" parent="." instance=ExtResource( 3 )]
-position = Vector2( 320, 64 )
+position = Vector2( 256, 0 )
 
 [node name="YSort" type="YSort" parent="."]
 
-[node name="doubleRedBed" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 672, 184 )
-
 [node name="hero" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 408, 280 )
+position = Vector2( 432, 120 )
 
-[node name="plant" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 168, 272 )
+[node name="shotgun_bot" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 896, 520 )
 
 [node name="Light2D" parent="." instance=ExtResource( 6 )]
+visible = false
 position = Vector2( 136, 304 )
 color = Color( 0.160784, 0.0901961, 0.996078, 1 )
 
 [node name="Light2D2" parent="." instance=ExtResource( 6 )]
+visible = false
 position = Vector2( 592, 296 )
 color = Color( 0.160784, 0.0901961, 0.996078, 1 )

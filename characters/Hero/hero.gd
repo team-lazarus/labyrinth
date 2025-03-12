@@ -113,9 +113,11 @@ func _process(_delta):
 			break
 
 func manage_shooting():
+	set_attack_to_white()
 	if current_state == State.DISARMED:
 		return
 	if agent:
+		show_agent_attack_UI(agent_direction_vector)		
 		if agent_direction_vector != Vector2.ZERO:
 			shoot(agent_direction_vector.angle())
 		return
@@ -131,6 +133,8 @@ func manage_shooting():
 		direction_vector += Vector2(0,-1)
 	if Input.is_key_pressed(KEY_DOWN):
 		direction_vector += Vector2(0,1)
+		
+	show_agent_attack_UI(direction_vector)
 	shoot(direction_vector.angle())
 
 func _physics_process(delta):
@@ -143,6 +147,7 @@ func get_player_velocity (delta):
 	if not agent:
 		get_input_vector()
 	input_vector = input_vector.normalized()
+	show_agent_movement_UI(input_vector)
 
 	# decide_and_play_animation(input_vector)
 	
@@ -270,3 +275,81 @@ func die():
 
 func calculate_net_reward():
 	return [hero_reward, gun_reward]
+	
+func show_agent_attack_UI(attack_direction):
+	# Reset all directions to white first
+	set_attack_to_white()
+	
+	# Right (0)
+	if attack_direction.x == 1 and attack_direction.y == 0:
+		$attack/direction_0.modulate = Color(1,0,0)
+	# Up-Right (1)
+	elif attack_direction.x == 1 and attack_direction.y == -1:
+		$attack/direction_1.modulate = Color(1,0,0)
+	# Up (2)
+	elif attack_direction.x == 0 and attack_direction.y == -1:
+		$attack/direction_2.modulate = Color(1,0,0)
+	# Up-Left (3)
+	elif attack_direction.x == -1 and attack_direction.y == -1:
+		$attack/direction_3.modulate = Color(1,0,0)
+	# Left (4)
+	elif attack_direction.x == -1 and attack_direction.y == 0:
+		$attack/direction_4.modulate = Color(1,0,0)
+	# Down-Left (5)
+	elif attack_direction.x == -1 and attack_direction.y == 1:
+		$attack/direction_5.modulate = Color(1,0,0)
+	# Down (6)
+	elif attack_direction.x == 0 and attack_direction.y == 1:
+		$attack/direction_6.modulate = Color(1,0,0)
+	# Down-Right (7)
+	elif attack_direction.x == 1 and attack_direction.y == 1:
+		$attack/direction_7.modulate = Color(1,0,0)
+
+func set_attack_to_white():
+	for i in range(8):
+		get_node("attack/direction_" + str(i)).modulate = Color(1,1,1,0)
+
+func show_agent_movement_UI(movement_direction):
+	# Reset all directions to white first
+	set_movement_to_white()
+	if player_velocity == Vector2.ZERO:
+		$movement/direction_8.modulate = Color(1,0,0)
+		return
+	
+	# Convert the direction to an angle in radians
+	var angle = movement_direction.angle()
+	
+	# Map the angle to one of the 8 directions (0-7)
+	# Each direction covers 45 degrees (PI/4 radians)
+	var direction_index = int(round(8 * angle / (2 * PI) + 8)) % 8
+	
+	# Right (0): angle near 0 or 2π
+	if direction_index == 0:
+		$movement/direction_0.modulate = Color(1,0,0)
+	# Up-Right (1): angle near π/4
+	elif direction_index == 7:
+		$movement/direction_1.modulate = Color(1,0,0)
+	# Up (2): angle near π/2
+	elif direction_index == 6:
+		$movement/direction_2.modulate = Color(1,0,0)
+	# Up-Left (3): angle near 3π/4
+	elif direction_index == 5:
+		$movement/direction_3.modulate = Color(1,0,0)
+	# Left (4): angle near π
+	elif direction_index == 4:
+		$movement/direction_4.modulate = Color(1,0,0)
+	# Down-Left (5): angle near 5π/4
+	elif direction_index == 3:
+		$movement/direction_5.modulate = Color(1,0,0)
+	# Down (6): angle near 3π/2
+	elif direction_index == 2:
+		$movement/direction_6.modulate = Color(1,0,0)
+	# Down-Right (7): angle near 7π/4
+	elif direction_index == 1:
+		$movement/direction_7.modulate = Color(1,0,0)
+	else:
+		$movement/direction_8.modulate = Color(1,0,0)
+
+func set_movement_to_white():
+	for i in range(9):
+		get_node("movement/direction_" + str(i)).modulate = Color(1,1,1,0)

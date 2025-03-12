@@ -1,10 +1,13 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://weapons/guns/canon/canon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/Hero/hero.gd" type="Script" id=2]
-[ext_resource path="res://sprites/Hero/protagonist_remake.png" type="Texture" id=3]
+[ext_resource path="res://sprites/env/env-highcontrast/protagonist_remake_remake.png" type="Texture" id=3]
 [ext_resource path="res://sprites/light/light_gimp.png" type="Texture" id=4]
+[ext_resource path="res://sprites/env/directions/arrow.png" type="Texture" id=5]
 [ext_resource path="res://trails/phase/phase_trail.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sprites/env/directions/attack-arrow.png" type="Texture" id=7]
+[ext_resource path="res://sprites/env/directions/move-stop.png" type="Texture" id=8]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -200,6 +203,61 @@ script = ExtResource( 2 )
 visible = false
 targetPath = NodePath("..")
 
+[node name="movement" type="Node2D" parent="."]
+position = Vector2( 0, -32 )
+
+[node name="direction_0" type="Sprite" parent="movement"]
+position = Vector2( 80, 0 )
+rotation = 1.5708
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 5 )
+
+[node name="direction_1" type="Sprite" parent="movement"]
+position = Vector2( 64, -56 )
+rotation = 0.785398
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 5 )
+
+[node name="direction_2" type="Sprite" parent="movement"]
+position = Vector2( 0, -80 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 5 )
+
+[node name="direction_3" type="Sprite" parent="movement"]
+position = Vector2( -64, -56 )
+rotation = -0.785398
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 5 )
+
+[node name="direction_4" type="Sprite" parent="movement"]
+position = Vector2( -80, 0 )
+rotation = -1.5708
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 5 )
+
+[node name="direction_5" type="Sprite" parent="movement"]
+position = Vector2( -1.90735e-06, 88 )
+rotation = 3.14159
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 5 )
+
+[node name="direction_6" type="Sprite" parent="movement"]
+position = Vector2( 64, 64 )
+rotation = 2.35619
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 5 )
+
+[node name="direction_7" type="Sprite" parent="movement"]
+position = Vector2( -64, 72 )
+rotation = -2.35619
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 5 )
+
+[node name="direction_8" type="Sprite" parent="movement"]
+position = Vector2( 4, 40 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 8 )
+
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 2 )
 position = Vector2( 4.8, -32.5333 )
@@ -249,3 +307,53 @@ shape = SubResource( 22 )
 position = Vector2( 0, -30 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="attack" type="Node2D" parent="."]
+position = Vector2( 0, -32 )
+
+[node name="direction_0" type="Sprite" parent="attack"]
+position = Vector2( 91, 0 )
+rotation = 1.5708
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 7 )
+
+[node name="direction_1" type="Sprite" parent="attack"]
+position = Vector2( 72, -64 )
+rotation = 0.785398
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 7 )
+
+[node name="direction_2" type="Sprite" parent="attack"]
+position = Vector2( 0, -91 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 7 )
+
+[node name="direction_3" type="Sprite" parent="attack"]
+position = Vector2( -72, -64 )
+rotation = -0.785398
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 7 )
+
+[node name="direction_4" type="Sprite" parent="attack"]
+position = Vector2( -92, 0 )
+rotation = -1.5708
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 7 )
+
+[node name="direction_5" type="Sprite" parent="attack"]
+position = Vector2( -73, 81 )
+rotation = -2.35619
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 7 )
+
+[node name="direction_6" type="Sprite" parent="attack"]
+position = Vector2( 9.53674e-07, 101 )
+rotation = 3.14159
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 7 )
+
+[node name="direction_7" type="Sprite" parent="attack"]
+position = Vector2( 72, 72 )
+rotation = 2.35619
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 7 )

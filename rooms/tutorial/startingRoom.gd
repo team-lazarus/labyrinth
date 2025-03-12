@@ -12,3 +12,6 @@ var doors = []
 var enemies = []
 
 var backdoor = false
+
+func _ready():
+	$YSort/shotgun_bot.wake($YSort/hero)

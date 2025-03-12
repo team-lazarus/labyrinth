@@ -44,24 +44,20 @@ margin_bottom = 128.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Panel"]
+visible = false
 margin_top = -0.93644
 margin_right = 99.0
 margin_bottom = 127.064
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 5
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="health" type="Control" parent="MarginContainer/Panel"]
-margin_left = 99.6594
-margin_top = -0.264866
-margin_right = 247.659
-margin_bottom = 39.7351
+margin_right = 148.0
+margin_bottom = 40.0
+rect_scale = Vector2( 1.2, 1.2 )
 __meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
+"_edit_group_": true
 }
 
 [node name="0" type="TextureRect" parent="MarginContainer/Panel/health"]
@@ -183,6 +179,7 @@ __meta__ = {
 }
 
 [node name="dodge" type="TextureRect" parent="MarginContainer/Panel/abilities"]
+visible = false
 margin_left = -1.24408
 margin_top = 0.297302
 margin_right = 58.7559
@@ -242,6 +239,7 @@ __meta__ = {
 }
 
 [node name="active" type="TextureRect" parent="MarginContainer/Panel/abilities"]
+visible = false
 margin_left = 60.0
 margin_right = 120.0
 margin_bottom = 60.0
@@ -297,6 +295,7 @@ __meta__ = {
 }
 
 [node name="ultimate" type="TextureRect" parent="MarginContainer/Panel/abilities"]
+visible = false
 margin_left = 120.0
 margin_right = 180.0
 margin_bottom = 60.0
@@ -350,6 +349,7 @@ __meta__ = {
 }
 
 [node name="items" type="Control" parent="MarginContainer/Panel"]
+visible = false
 margin_left = 779.326
 margin_top = 0.417507
 margin_right = 979.326

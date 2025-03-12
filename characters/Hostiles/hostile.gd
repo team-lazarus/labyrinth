@@ -9,13 +9,13 @@ enum State {
 	AWAKE
 }
 
-var MAXIMUM_BOT_VELOCITY = 100
-const BOT_ACCELRATION = 500
+var MAXIMUM_BOT_VELOCITY = 200
+const BOT_ACCELRATION = 1000
 const RAY_CAST_LENGTH = 50
 const HERO_DISTANCE = 200
 const MAX_HEALTH = 4
 
-var current_state = State.SLEEP
+var current_state = State.AWAKE
 var hero_shootable = false
 var hero
 
@@ -48,9 +48,9 @@ func _ready():
 		var angle = itr * 2 * PI / num_rays
 		
 		node.cast_to = Vector2(0,RAY_CAST_LENGTH).rotated(angle)
+		node.transform.scaled(Vector2.ONE * 2)
 		rays[itr] = node
 	
-	$AnimationPlayer.play("idle")
 
 func _process(delta):
 	if health < 1 :
@@ -63,13 +63,9 @@ func _process(delta):
 		shoot()
 
 func fix_sprite_direction():
-	if hero.global_position < global_position:
-		$Sprite.flip_h = true
-	else:
-		$Sprite.flip_h = false 
+	$Sprite.transform.rotated(velocity.angle())
 
 func wake (body):
-	AnimationHandler.play("wake")
 	current_state = State.AWAKE
 	
 	weapon.follow = body
@@ -99,11 +95,10 @@ func follow(delta):
 
 func raycast_check():
 	var dir = Vector2.ZERO
-	
-	if position.distance_to(hero.position) > HERO_DISTANCE:
-		dir = position.direction_to(hero.position)
-	else:
-		dir = hero.position.direction_to(position)
+	#if global_position.distance_to(hero.global_position) > HERO_DISTANCE:
+	dir = global_position.direction_to(hero.global_position)
+	#else:
+	#	dir = hero.position.direction_to(position)
 	
 	var eligible_rays = Vector2.ZERO
 	for ray in rays:
@@ -118,7 +113,7 @@ func raycast_check():
 				weight = 0.5
 			eligible_rays += ray.cast_to.normalized() * factor * weight
 	
-	dir =  eligible_rays
+	dir +=  eligible_rays
 	
 	return dir.normalized()
 
@@ -137,7 +132,7 @@ func _on_flashTimer_timeout():
 	$weapon/muzzle/Sprite.material.set_shader_param("flash_modifier",0)
 
 func die ():
-	hero.passive.on_enemy_death()
+	#hero.passive.on_enemy_death()
 	queue_free()
 
 func _on_Timer_timeout():
