@@ -39,6 +39,7 @@ var init_done = false
 var modifiers = []
 
 var enemy_type = ""
+var shot = false
 
 func _ready():
 	rays.resize(num_rays)
@@ -119,6 +120,8 @@ func raycast_check():
 
 func deal_damage(dmg):
 	flash()
+	if dmg < 0:
+		shot = true
 	health -= dmg
 
 func flash():

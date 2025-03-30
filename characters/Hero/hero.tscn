@@ -357,3 +357,53 @@ position = Vector2( 72, 72 )
 rotation = 2.35619
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 7 )
+
+[node name="line_of_sight" type="Node2D" parent="."]
+
+[node name="direction_7" type="RayCast2D" parent="line_of_sight"]
+position = Vector2( 0, -32 )
+enabled = true
+cast_to = Vector2( 296, 296 )
+collision_mask = 2
+
+[node name="direction_0" type="RayCast2D" parent="line_of_sight"]
+position = Vector2( 0, -32 )
+enabled = true
+cast_to = Vector2( 480, 0 )
+collision_mask = 2
+
+[node name="direction_1" type="RayCast2D" parent="line_of_sight"]
+position = Vector2( 0, -32 )
+enabled = true
+cast_to = Vector2( 272, -240 )
+collision_mask = 2
+
+[node name="direction_2" type="RayCast2D" parent="line_of_sight"]
+position = Vector2( 0, -32 )
+enabled = true
+cast_to = Vector2( 0, -240 )
+collision_mask = 2
+
+[node name="direction_3" type="RayCast2D" parent="line_of_sight"]
+position = Vector2( 0, -32 )
+enabled = true
+cast_to = Vector2( -272, -240 )
+collision_mask = 2
+
+[node name="direction_4" type="RayCast2D" parent="line_of_sight"]
+position = Vector2( 0, -32 )
+enabled = true
+cast_to = Vector2( -480, 0 )
+collision_mask = 2
+
+[node name="direction_5" type="RayCast2D" parent="line_of_sight"]
+position = Vector2( 0, -32 )
+enabled = true
+cast_to = Vector2( -280, 304 )
+collision_mask = 2
+
+[node name="direction_6" type="RayCast2D" parent="line_of_sight"]
+position = Vector2( 0, -32 )
+enabled = true
+cast_to = Vector2( 0, 304 )
+collision_mask = 2

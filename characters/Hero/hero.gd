@@ -69,6 +69,17 @@ const KILLING_ENEMY_REWARD = 2
 var hero_reward = 0
 var gun_reward = 0
 
+onready var rays = [
+	$line_of_sight/direction_0,
+	$line_of_sight/direction_1,
+	$line_of_sight/direction_2,
+	$line_of_sight/direction_3,
+	$line_of_sight/direction_4,
+	$line_of_sight/direction_5,
+	$line_of_sight/direction_6,
+	$line_of_sight/direction_7,
+]
+
 func _ready():
 	if get_node("passive") == null:
 		passive = DEFAULT_PASSIVE.instance()
@@ -92,12 +103,15 @@ func _ready():
 	$weapon.follow = null
 
 func _process(_delta):
+	hero_reward = 0
 	if health < 1 :
 		die()
 	elif health > MAX_HEALTH:
 		health = MAX_HEALTH
 	
 	manage_shooting()
+	if agent or true:
+		hero_reward += raycast_check()
 	
 	for itr in range(progress_bars.size()):
 		var progress_bar = progress_bars[itr]
@@ -190,7 +204,6 @@ func _input(event):
 	if event is InputEventKey:
 		if event.pressed:
 			var character: String = OS.get_scancode_string(event.scancode)
-			print("Pressed " + character)
 	
 	if current_state != State.STUNNED:
 		if current_state != State.MUTED:
@@ -353,3 +366,14 @@ func show_agent_movement_UI(movement_direction):
 func set_movement_to_white():
 	for i in range(9):
 		get_node("movement/direction_" + str(i)).modulate = Color(1,1,1,0)
+
+func raycast_check():
+	var line_of_sights = 0
+	
+	var eligible_rays = Vector2.ZERO
+	for ray in rays:
+		if ray.get_collider() != null:
+			line_of_sights += 1
+	
+	
+	return line_of_sights * LINE_OF_SIGHT_REWARD

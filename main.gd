@@ -7,6 +7,7 @@ const SERVER_PORT = 4200
 onready var tcp_server = TCP_Server.new()
 var peer_connections = []
 var current_level = null
+var previous_enemies = -1
 
 func _ready():
 	start_server()
@@ -134,7 +135,21 @@ func extract_state_from_node(node):
 				# x_1, y_1, x_2, y_2
 	var enemy_data = []
 	var rewards = node.hero.calculate_net_reward()
+	if node.current_enemies == 0:
+		print("finish")
+	var gun_reward = rewards[1] + int(node.current_enemies == 0) * 5
+	var hero_reward = rewards[0] + int(node.current_enemies == 0) * 5
+	var dead_enemies = 0
+	if previous_enemies > 0 and previous_enemies > len(node.enemies):
+		dead_enemies = previous_enemies - len(node.enemies)
+		gun_reward += dead_enemies*2
+		print("dead enemy")
+	previous_enemies = len(node.enemies)
 	for enemy in node.enemies:
+		if enemy.shot:
+			print("shot enemy")
+			enemy.shot = false
+			gun_reward += 1
 		enemy_data.append({
 			"position" : [enemy.global_position.x, enemy.global_position.y],
 			"health" : enemy.health,
@@ -142,7 +157,7 @@ func extract_state_from_node(node):
 			"type" : enemy.enemy_type
 		})
 	return {
-		"hero_reward" : rewards[0],
+		"hero_reward" : hero_reward,
 		"gun_reward" : rewards[1],
 		"terminated" : false,
 		"hero" : {

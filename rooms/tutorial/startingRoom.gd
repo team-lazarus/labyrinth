@@ -13,5 +13,14 @@ var enemies = []
 
 var backdoor = false
 
+var current_enemies = 1
+
 func _ready():
 	$YSort/shotgun_bot.wake($YSort/hero)
+
+func _process(delta):
+	current_enemies = -1
+	# - 1 for hero
+	for child in $YSort.get_children():
+		if child is KinematicBody2D:
+			current_enemies += 1
