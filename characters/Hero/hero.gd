@@ -80,6 +80,8 @@ onready var rays = [
 	$line_of_sight/direction_7,
 ]
 
+var terminated = false
+
 func _ready():
 	if get_node("passive") == null:
 		passive = DEFAULT_PASSIVE.instance()
@@ -284,6 +286,7 @@ func update_health_UI ():
 			health_nodes.get_child(9).texture = load("res://sprites/UI/no_health_end.png")
 
 func die():
+	terminated = true
 	get_tree().change_scene("res://main.tscn")
 
 func calculate_net_reward():

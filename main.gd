@@ -156,10 +156,10 @@ func extract_state_from_node(node):
 			"direction" : enemy.bot_direction.angle(),
 			"type" : enemy.enemy_type
 		})
-	return {
+	var next_state_data = {
 		"hero_reward" : hero_reward,
 		"gun_reward" : rewards[1],
-		"terminated" : false,
+		"terminated" : node.hero.terminated,
 		"hero" : {
 			"position": [node.hero.position.x, node.hero.position.y],
 			"health" : node.hero.health,
@@ -173,6 +173,12 @@ func extract_state_from_node(node):
 		"backdoor" : backdoor_data,
 		"walls" : []
 	}
+	if node.hero.terminated:
+		remove_child($level)
+		var level = load("res://rooms/tutorial/startingRoom.tscn").instance()
+		level.position = Vector2.ZERO
+		add_child(level)
+	return next_state_data
 
 func execute_actions(response):
 	var parse_result = JSON.parse(response)
