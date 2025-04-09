@@ -16,5 +16,5 @@ func _ready():
 	
 	MAXIMUM_BOT_VELOCITY = 250
 	
-	$AnimationPlayer.play("idle")
+	#$AnimationPlayer.play("idle")
 

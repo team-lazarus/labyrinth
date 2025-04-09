@@ -22,4 +22,4 @@ func _ready():
 	strength = 2
 	health = 10
 	
-	$AnimationPlayer.play("idle")
+	#$AnimationPlayer.play("idle")

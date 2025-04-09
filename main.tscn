@@ -18,7 +18,7 @@ position = Vector2( 27.8315, 6170.83 )
 scale = Vector2( 500, 50000 )
 
 [node name="level" parent="." instance=ExtResource( 1 )]
-position = Vector2( 74.8271, -7.0507 )
+position = Vector2( 0, 400 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 pause_mode = 2

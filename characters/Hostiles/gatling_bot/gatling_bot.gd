@@ -21,4 +21,4 @@ func _ready():
 	
 	strength = 3
 	
-	$AnimationPlayer.play("idle")
+	#$AnimationPlayer.play("idle")
