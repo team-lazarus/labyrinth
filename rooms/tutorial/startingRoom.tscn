@@ -1,10 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://FloorTilesMap.tscn" type="PackedScene" id=1]
-[ext_resource path="res://characters/Hostiles/shotgun_bot/shotgun_bot.tscn" type="PackedScene" id=2]
 [ext_resource path="res://furniture/door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://rooms/tutorial/startingRoom.gd" type="Script" id=4]
-[ext_resource path="res://characters/Hero/hero.tscn" type="PackedScene" id=5]
 [ext_resource path="res://furniture/light.tscn" type="PackedScene" id=6]
 
 [node name="startingRoom" type="Node2D"]
@@ -18,12 +16,6 @@ tile_data = PoolIntArray( -4, 3, 0, -3, 0, 0, -2, 0, 0, -65536, 0, 0, -65535, 0,
 position = Vector2( 256, 0 )
 
 [node name="YSort" type="YSort" parent="."]
-
-[node name="hero" parent="YSort" instance=ExtResource( 5 )]
-position = Vector2( 432, 120 )
-
-[node name="shotgun_bot" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 896, 520 )
 
 [node name="Light2D" parent="." instance=ExtResource( 6 )]
 visible = false

@@ -3,20 +3,35 @@ extends Node2D
 # var next_scene = "res://rooms/tutorial/shootingRoom.tscn"
 var next_scene = "res://rooms/level1/lvl1.tscn"
 var next_next_scene = null
-onready var hero = $YSort/hero
+onready var hero = load("res://characters/Hero/hero.tscn").instance()
+
 
 var text_script = null
 
-var bullets = []
-var doors = []
-var enemies = []
+onready var bullets = []
+onready var doors = []
+onready var enemies = []
 
 var backdoor = false
 
 var current_enemies = 1
 
+const X_MAX = 800
+const Y_MAX = 400
+
 func _ready():
-	$YSort/shotgun_bot.wake($YSort/hero)
+	for child in $YSort.get_children():
+		remove_child(child)
+		child.queue_free()
+		
+	randomize()
+	var x = randf()*X_MAX
+	var y = 100 + randf()*Y_MAX
+	
+	var spawn = Vector2(x, y)
+	hero.position = spawn
+	randomize()
+	$YSort.add_child(hero)
 
 var viable_enemies = [
 	"res://characters/Hostiles/wheel_bot/wheel_bot.tscn",
@@ -34,15 +49,23 @@ func _process(delta):
 	
 	if current_enemies == 0:
 		var num_enemies = 0
-		while num_enemies < (randi()%5)+1:
+		while num_enemies < (randi()%4)+1:
 			var enemy_path = viable_enemies[randi() % viable_enemies.size()]
 			var enemy = load(enemy_path).instance()
+			randomize()
 			
-			var x = randf()*800
-			var y = randf()*400
+			var x = randf()*X_MAX
+			var y = 100 + randf()*Y_MAX
 			
 			var spawn = Vector2(x, y)
+			randomize()
 			enemy.position = spawn
 			$YSort.add_child(enemy)
 			enemy.wake($YSort/hero)			
 			num_enemies += 1
+
+func cleanup():
+	for child in $YSort.get_children():
+		remove_child(child)
+		child.queue_free()
+		

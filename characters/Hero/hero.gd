@@ -83,6 +83,8 @@ onready var rays = [
 var terminated = false
 
 func _ready():
+	health = 10
+	update_health_UI()
 	if get_node("passive") == null:
 		passive = DEFAULT_PASSIVE.instance()
 		passive.user = self
@@ -237,12 +239,13 @@ func deal_damage (dmg) :
 	dmg = passive.on_get_hit(dmg)
 	health -= dmg
 	if health < 1 :
+		print("dye me")
 		die()
 	else:
 		for bullet in get_parent().get_parent().bullets:
 			if bullet != null and is_instance_valid(bullet) and bullet is Area2D:
 				bullet.die()
-		update_health_UI()
+	update_health_UI()
 
 func heal(heal):
 	health += heal
@@ -276,18 +279,19 @@ func update_health_UI ():
 	
 	var health_nodes = node.get_node("overlay/MarginContainer/Panel/health")
 	
-	for h in range(0,health):
+	for h in range(0,max(health, 0)):
 		health_nodes.get_child(h).texture = load("res://sprites/UI/health.png")
 		if h == 9:
 			health_nodes.get_child(9).texture = load("res://sprites/UI/health_end.png")
-	for h in range(health,MAX_HEALTH):
+	for h in range(max(health, 0),MAX_HEALTH):
 		health_nodes.get_child(h).texture = load("res://sprites/UI/no_health.png")
 		if h == 9:
 			health_nodes.get_child(9).texture = load("res://sprites/UI/no_health_end.png")
 
 func die():
 	terminated = true
-	get_tree().change_scene("res://main.tscn")
+	print(terminated)
+	#get_tree().change_scene("res://main.tscn")
 
 func calculate_net_reward():
 	return [hero_reward, gun_reward]

@@ -70,6 +70,7 @@ func _process(_delta):
 	if tcp_server.is_listening():
 		# Check for new connections
 		if tcp_server.is_connection_available():
+			Engine.time_scale = 10
 			var new_peer = tcp_server.take_connection()
 			peer_connections.append(new_peer)
 			print("[INFO] New client connected")
@@ -93,11 +94,12 @@ func dialogue():
 	$TextBox.current_state = $TextBox.State.READY
 
 func get_current_game_state():
-	for child in get_children():
-		if child.name == "level":
-			current_level = child
-			var data = extract_state_from_node(child)
-			return JSON.print(data)
+	if current_level == null:
+		for child in get_children():
+			if child.name == "level":
+				current_level = child
+	var data = extract_state_from_node(current_level)
+	return JSON.print(data)
 
 func extract_state_from_node(node):
 	var bullet_data = []
@@ -178,9 +180,14 @@ func extract_state_from_node(node):
 		"walls" : []
 	}
 	if node.hero.terminated:
-		remove_child($level)
-		var level = load("res://rooms/tutorial/startingRoom.tscn").instance()
+		var level = current_level
+		if level != null:
+			level.cleanup()			
+			remove_child(level)
+			level.queue_free()
+		level = load("res://rooms/tutorial/startingRoom.tscn").instance()
 		level.position = Vector2.ZERO
+		current_level = level
 		add_child(level)
 	return next_state_data
 
@@ -193,7 +200,7 @@ func execute_actions(response):
 		shoot_hero(actions[1])
 
 func reset_hero():
-	current_level.hero.agent = true	
+	current_level.hero.agent = true
 	current_level.hero.input_vector = Vector2.ZERO
 	current_level.hero.agent_direction_vector = Vector2.ZERO
 
