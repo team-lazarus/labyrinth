@@ -10,9 +10,7 @@ var current_level = null
 var previous_enemies = -1
 
 func _ready():
-	if Global.fresh_start:
-		Global.fresh_start = false
-		start_server()
+	start_server()
 	
 
 func start_server():
@@ -35,7 +33,6 @@ func handle_client_request(peer_index = 0):
 			execute_actions(action)
 
 func write_to_client(data, peer_index = 0):
-	print("HELLO I AM STILL WORKING")
 	if peer_index < peer_connections.size():
 		var peer = peer_connections[peer_index]
 		if peer.is_connected_to_host():

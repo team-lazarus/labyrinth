@@ -239,7 +239,6 @@ func deal_damage (dmg) :
 	dmg = passive.on_get_hit(dmg)
 	health -= dmg
 	if health < 1 :
-		print("dye me")
 		die()
 	else:
 		for bullet in get_parent().get_parent().bullets:
@@ -290,7 +289,6 @@ func update_health_UI ():
 
 func die():
 	terminated = true
-	print(terminated)
 	#get_tree().change_scene("res://main.tscn")
 
 func calculate_net_reward():
