@@ -14,8 +14,11 @@ shader_param/flash_modifier = 0.0
 [node name="wheel_bot" instance=ExtResource( 1 )]
 script = ExtResource( 4 )
 
-[node name="Sprite" parent="." index="0"]
+[node name="Sprite" parent="." index="1"]
 material = SubResource( 1 )
 
 [node name="weapon" parent="." index="5" instance=ExtResource( 3 )]
 scale = Vector2( 1.5, 1.5 )
+
+[node name="1" parent="." index="6"]
+collide_with_areas = true
