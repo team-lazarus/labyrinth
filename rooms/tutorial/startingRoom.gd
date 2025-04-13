@@ -4,7 +4,7 @@ extends Node2D
 var next_scene = "res://rooms/level1/lvl1.tscn"
 var next_next_scene = null
 onready var hero = load("res://characters/Hero/hero.tscn").instance()
-
+onready var label = $Label
 
 var text_script = null
 
@@ -18,6 +18,11 @@ var current_enemies = 1
 
 const X_MAX = 800
 const Y_MAX = 400
+
+var hero_reward = 0
+var gun_reward = 0
+
+var wave = 0
 
 func _ready():
 	for child in $YSort.get_children():
@@ -47,7 +52,10 @@ func _process(delta):
 		if child is KinematicBody2D:
 			current_enemies += 1
 	
+	
 	if current_enemies == 0:
+		hero_reward += 5 if wave > 0 else 0
+		gun_reward += 5 if wave > 0 else 0
 		var num_enemies = 0
 		while num_enemies < (randi()%4)+1:
 			var enemy_path = viable_enemies[randi() % viable_enemies.size()]
@@ -60,6 +68,7 @@ func _process(delta):
 			var spawn = Vector2(x, y)
 			randomize()
 			enemy.position = spawn
+			enemy.level = self
 			$YSort.add_child(enemy)
 			enemy.wake($YSort/hero)			
 			num_enemies += 1

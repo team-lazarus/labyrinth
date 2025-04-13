@@ -266,6 +266,7 @@ texture = ExtResource( 3 )
 flip_h = true
 hframes = 10
 vframes = 10
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 4.8, 16 )
@@ -407,3 +408,13 @@ position = Vector2( 0, -32 )
 enabled = true
 cast_to = Vector2( 0, 304 )
 collision_mask = 2
+
+[node name="Label" type="Label" parent="."]
+margin_left = 232.0
+margin_top = -272.0
+margin_right = 350.0
+margin_bottom = -241.0
+rect_scale = Vector2( 2, 2 )
+text = "hero_reward=
+gun_reward="
+align = 2

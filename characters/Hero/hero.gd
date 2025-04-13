@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+onready var label = $Label
 # constants
 const MAX_HEALTH = 10
 const MAX_ITEMS = 3
@@ -60,7 +61,8 @@ const INCREASING_HEALTH_REWARD = 1
 const LINE_OF_SIGHT_REWARD = 1
 const OPENING_DOOR_REWARD = 2
 const ROOM_CLEAR_REWARD = 5
-const DECREASING_HEALTH_REWARD = -2
+const DECREASING_HEALTH_PUNISHMENT = -2.5
+const DYING_PUNISHMENT = -10
 # GUN_REWARD VALUES #
 const SHOOTING_ENEMY_REWARD = 1
 const KILLING_ENEMY_REWARD = 2
@@ -238,7 +240,9 @@ func shoot(direction: float):
 func deal_damage (dmg) :
 	dmg = passive.on_get_hit(dmg)
 	health -= dmg
+	hero_reward += DECREASING_HEALTH_PUNISHMENT * dmg
 	if health < 1 :
+		hero_reward += DYING_PUNISHMENT * dmg
 		die()
 	else:
 		for bullet in get_parent().get_parent().bullets:
@@ -255,7 +259,7 @@ func heal(heal):
 	if heal < 0:
 		hero_reward += INCREASING_HEALTH_REWARD * heal
 	elif heal > 0:
-		hero_reward += DECREASING_HEALTH_REWARD * heal
+		hero_reward += DECREASING_HEALTH_PUNISHMENT * heal
 	
 	update_health_UI()
 	

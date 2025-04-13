@@ -24,6 +24,7 @@ var friendly_group = "hostile"
 var health = 10
 var strength = 1
 var bot_direction = Vector2.ZERO
+var level = null
 
 # context based steering
 var rays = []
@@ -40,6 +41,7 @@ var modifiers = []
 
 var enemy_type = ""
 var shot = false
+var SHOT_REWARD = 2
 
 func _ready():
 	rays.resize(num_rays)
@@ -120,11 +122,13 @@ func raycast_check(i_wanna_be_closer_baby = 1):
 
 func deal_damage(dmg):
 	flash()
-	if dmg < 0:
-		shot = true
+	print("i got hit!")
+	level.gun_reward += dmg * SHOT_REWARD
+	print("adding gun reward")
 	health -= dmg
 
 func flash():
+	print("flashing")
 	$Sprite.material.set_shader_param("flash_modifier",1)
 	$weapon/muzzle/Sprite.material.set_shader_param("flash_modifier",1)
 	$flashTimer.start()

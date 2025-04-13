@@ -2,7 +2,6 @@ extends Node2D
 
 onready var TextBox = $TextBox
 # Add the reward display label
-onready var reward_display = $RewardDisplay
 
 const SERVER_IP = "0.0.0.0"
 const SERVER_PORT = 4200
@@ -16,9 +15,6 @@ var current_hero_reward = 0
 
 func _ready():
 	start_server()
-	# Create the reward display if it doesn't exist
-	if not has_node("RewardDisplay"):
-		create_reward_display()
 	
 
 func start_server():
@@ -27,36 +23,6 @@ func start_server():
 		print("[ERROR] Failed to start TCP server")
 	else:
 		print("[INFO] Server successfully started on port ", SERVER_PORT)
-
-# Create the reward display label
-func create_reward_display():
-	var label = Label.new()
-	label.name = "RewardDisplay"
-	label.add_font_override("font", load("res://fonts/monospace_font.tres"))  # Replace with your monospace font path
-	# If you don't have a monospace font resource, you can create one dynamically:
-	if not ResourceLoader.exists("res://fonts/monospace_font.tres"):
-		var dynamic_font = DynamicFont.new()
-		dynamic_font.font_data = load("res://fonts/DroidSansMono.ttf")  # Adjust to a monospace font you have
-		# If you don't have a specific monospace font file, you can use the default font:
-		if not ResourceLoader.exists("res://fonts/DroidSansMono.ttf"):
-			var default_theme = Theme.new()
-			label.set("custom_fonts/font", default_theme.get_default_font())
-			# And set a monospace font family
-			label.add_constant_override("fonttype", "Monospace")
-	
-	label.align = Label.ALIGN_RIGHT
-	label.valign = Label.VALIGN_TOP
-	label.margin_right = -10  # 10 pixels from the right edge
-	label.margin_top = 10     # 10 pixels from the top edge
-	label.rect_position = Vector2(get_viewport_rect().size.x - 200, 10)
-	label.rect_size = Vector2(190, 60)
-	label.text = "Gun Reward: 0\nHero Reward: 0"
-	add_child(label)
-	reward_display = label
-
-func update_reward_display():
-	if reward_display != null:
-		reward_display.text = "Gun Reward: " + str(current_gun_reward) + "\nHero Reward: " + str(current_hero_reward)
 
 func handle_client_request(peer_index = 0):
 	# 1. Send current game state
@@ -118,8 +84,6 @@ func _process(_delta):
 		for i in range(peer_connections.size()):
 			handle_client_request(i)
 	
-	# Update the reward display every frame
-	update_reward_display()
 
 func dialogue():
 	var file = File.new()
@@ -184,18 +148,21 @@ func extract_state_from_node(node):
 	var enemy_data = []
 	var rewards = node.hero.calculate_net_reward()
 	if node.current_enemies == 0:
-		print("finish")
-	var gun_reward = rewards[1] + int(node.current_enemies == 0) * 5
-	var hero_reward = rewards[0] + int(node.current_enemies == 0) * 5
+		pass
+		#print("finish")
+	var gun_reward = rewards[1] + node.gun_reward
+	var hero_reward = rewards[0] + node.hero_reward
+	node.hero_reward = 0
+	node.gun_reward = 0
 	var dead_enemies = 0
 	if previous_enemies > 0 and previous_enemies > len(node.enemies):
 		dead_enemies = previous_enemies - len(node.enemies)
 		gun_reward += dead_enemies*2
-		print("dead enemy")
+		#print("dead enemy")
 	previous_enemies = len(node.enemies)
 	for enemy in node.enemies:
 		if enemy.shot:
-			print("shot enemy")
+			#print("shot enemy")
 			enemy.shot = false
 			gun_reward += 1
 		enemy_data.append({
@@ -204,10 +171,9 @@ func extract_state_from_node(node):
 			"direction" : enemy.bot_direction.angle(),
 			"type" : enemy.enemy_type
 		})
-	
-	# Update the tracked rewards for display
-	current_gun_reward = gun_reward
-	current_hero_reward = hero_reward
+	if current_level != null:
+		current_level.hero.label.text = "Gun Reward: " + str(gun_reward) + "\nHero Reward: " + str(hero_reward)
+		print("Gun Reward: " + str(gun_reward) + ":: Hero Reward: " + str(hero_reward))
 	
 	var next_state_data = {
 		"hero_reward" : hero_reward,
