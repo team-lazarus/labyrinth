@@ -1,6 +1,8 @@
 extends Node2D
 
 onready var TextBox = $TextBox
+# Add the reward display label
+onready var reward_display = $RewardDisplay
 
 const SERVER_IP = "0.0.0.0"
 const SERVER_PORT = 4200
@@ -8,9 +10,15 @@ onready var tcp_server = TCP_Server.new()
 var peer_connections = []
 var current_level = null
 var previous_enemies = -1
+# Track rewards for display
+var current_gun_reward = 0
+var current_hero_reward = 0
 
 func _ready():
 	start_server()
+	# Create the reward display if it doesn't exist
+	if not has_node("RewardDisplay"):
+		create_reward_display()
 	
 
 func start_server():
@@ -20,10 +28,42 @@ func start_server():
 	else:
 		print("[INFO] Server successfully started on port ", SERVER_PORT)
 
+# Create the reward display label
+func create_reward_display():
+	var label = Label.new()
+	label.name = "RewardDisplay"
+	label.add_font_override("font", load("res://fonts/monospace_font.tres"))  # Replace with your monospace font path
+	# If you don't have a monospace font resource, you can create one dynamically:
+	if not ResourceLoader.exists("res://fonts/monospace_font.tres"):
+		var dynamic_font = DynamicFont.new()
+		dynamic_font.font_data = load("res://fonts/DroidSansMono.ttf")  # Adjust to a monospace font you have
+		# If you don't have a specific monospace font file, you can use the default font:
+		if not ResourceLoader.exists("res://fonts/DroidSansMono.ttf"):
+			var default_theme = Theme.new()
+			label.set("custom_fonts/font", default_theme.get_default_font())
+			# And set a monospace font family
+			label.add_constant_override("fonttype", "Monospace")
+	
+	label.align = Label.ALIGN_RIGHT
+	label.valign = Label.VALIGN_TOP
+	label.margin_right = -10  # 10 pixels from the right edge
+	label.margin_top = 10     # 10 pixels from the top edge
+	label.rect_position = Vector2(get_viewport_rect().size.x - 200, 10)
+	label.rect_size = Vector2(190, 60)
+	label.text = "Gun Reward: 0\nHero Reward: 0"
+	add_child(label)
+	reward_display = label
+
+func update_reward_display():
+	if reward_display != null:
+		reward_display.text = "Gun Reward: " + str(current_gun_reward) + "\nHero Reward: " + str(current_hero_reward)
+
 func handle_client_request(peer_index = 0):
 	# 1. Send current game state
 	var current_state = get_current_game_state()
-	write_to_client(current_state, peer_index)
+	write_to_client(JSON.print(current_state), peer_index)
+	if current_state["terminated"]:
+		write_to_client(JSON.print(get_current_game_state()), peer_index)
 	
 	# 2. Wait for and receive action from client
 	var action = null
@@ -33,6 +73,7 @@ func handle_client_request(peer_index = 0):
 			execute_actions(action)
 
 func write_to_client(data, peer_index = 0):
+	#print("[DEBUG] waiting to write")
 	if peer_index < peer_connections.size():
 		var peer = peer_connections[peer_index]
 		if peer.is_connected_to_host():
@@ -45,6 +86,7 @@ func write_to_client(data, peer_index = 0):
 		print("[ERROR] Invalid peer index")
 
 func read_from_client(peer_index = 0):
+	#print("[DEBUG] waiting to read")
 	if peer_index < peer_connections.size():
 		var peer = peer_connections[peer_index]
 		if peer.is_connected_to_host():
@@ -75,6 +117,9 @@ func _process(_delta):
 		# Handle existing connections
 		for i in range(peer_connections.size()):
 			handle_client_request(i)
+	
+	# Update the reward display every frame
+	update_reward_display()
 
 func dialogue():
 	var file = File.new()
@@ -96,7 +141,7 @@ func get_current_game_state():
 			if child.name == "level":
 				current_level = child
 	var data = extract_state_from_node(current_level)
-	return JSON.print(data)
+	return data
 
 func extract_state_from_node(node):
 	var bullet_data = []
@@ -159,9 +204,14 @@ func extract_state_from_node(node):
 			"direction" : enemy.bot_direction.angle(),
 			"type" : enemy.enemy_type
 		})
+	
+	# Update the tracked rewards for display
+	current_gun_reward = gun_reward
+	current_hero_reward = hero_reward
+	
 	var next_state_data = {
 		"hero_reward" : hero_reward,
-		"gun_reward" : rewards[1],
+		"gun_reward" : gun_reward,
 		"terminated" : node.hero.terminated,
 		"hero" : {
 			"position": [node.hero.position.x, node.hero.position.y],
