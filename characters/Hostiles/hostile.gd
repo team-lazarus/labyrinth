@@ -43,6 +43,8 @@ var enemy_type = ""
 var shot = false
 var SHOT_REWARD = 2
 
+var i_wanna_be_closer_baby = 1
+
 func _ready():
 	rays.resize(num_rays)
 	for itr in range(num_rays):
@@ -96,7 +98,7 @@ func follow(delta):
 	
 	velocity = move_and_slide(velocity)
 
-func raycast_check(i_wanna_be_closer_baby = 1):
+func raycast_check():
 	var dir = Vector2.ZERO
 	#if global_position.distance_to(hero.global_position) > HERO_DISTANCE:
 	dir = global_position.direction_to(hero.global_position)
@@ -109,9 +111,11 @@ func raycast_check(i_wanna_be_closer_baby = 1):
 			var weight 
 			var factor = dir.dot(ray.cast_to.normalized())
 			if ray.get_collider().get_groups().has("hostile"):
-				weight = -0
-			if ray.get_collider().get_groups().has("hero"):
-				weight = -2
+				weight = -1
+			elif ray.get_collider().get_groups().has("hero"):
+				weight = i_wanna_be_closer_baby * 3
+			elif ray.get_collider().get_groups().has("wall"):
+				weight = 0.5
 			else :
 				weight = 0
 			eligible_rays += ray.cast_to.normalized() * factor * weight

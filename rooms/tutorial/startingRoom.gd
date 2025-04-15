@@ -39,7 +39,6 @@ func _ready():
 	$YSort.add_child(hero)
 
 var viable_enemies = [
-	"res://characters/Hostiles/wheel_bot/wheel_bot.tscn",
 	"res://characters/Hostiles/twinshot_bot/twinshot_bot.tscn",
 	"res://characters/Hostiles/gatling_bot/gatling_bot.tscn",
 	"res://characters/Hostiles/shotgun_bot/shotgun_bot.tscn"
@@ -57,7 +56,7 @@ func _process(delta):
 		hero_reward += 5 if wave > 0 else 0
 		gun_reward += 5 if wave > 0 else 0
 		var num_enemies = 0
-		while num_enemies < (randi()%4)+1:
+		while num_enemies < (randi()%4)+2:
 			var enemy_path = viable_enemies[randi() % viable_enemies.size()]
 			var enemy = load(enemy_path).instance()
 			randomize()

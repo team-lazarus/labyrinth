@@ -9,6 +9,7 @@ extends "res://characters/Hostiles/hostile.gd"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	enemy_type = "sniper_bot"
+	i_wanna_be_closer_baby = -1
 	
 	rays.resize(num_rays)
 	for itr in range(num_rays):
@@ -22,4 +23,3 @@ func _ready():
 	strength = 2
 	health = 10
 	
-	#$AnimationPlayer.play("idle")
