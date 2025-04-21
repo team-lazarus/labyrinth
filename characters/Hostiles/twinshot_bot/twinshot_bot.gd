@@ -5,9 +5,9 @@ extends "res://characters/Hostiles/hostile.gd"
 # var a = 2
 # var b = "text"
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	MAXIMUM_BOT_VELOCITY = 50
 	enemy_type = "sniper_bot"
 	i_wanna_be_closer_baby = -1
 	

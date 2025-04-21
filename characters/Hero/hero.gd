@@ -57,13 +57,14 @@ var agent = false
 var agent_direction_vector = Vector2.ZERO
 
 # HERO_REWARD VALUE #
-const INCREASING_HEALTH_REWARD = 3
-const LINE_OF_SIGHT_REWARD = 2
+const INCREASING_HEALTH_REWARD = 2
+const LINE_OF_SIGHT_REWARD = 0.5
 const OPENING_DOOR_REWARD = 2
 const ROOM_CLEAR_REWARD = 7.5
 const DECREASING_HEALTH_PUNISHMENT = -2.5
 const DYING_PUNISHMENT = -10
-const LIVING_PUNISHMENT = -0.15
+const LIVING_PUNISHMENT = 1.06
+var living_punishment_moving = -0.15
 # GUN_REWARD VALUES #
 const SHOOTING_ENEMY_REWARD = 1
 const KILLING_ENEMY_REWARD = 2
@@ -110,7 +111,8 @@ func _ready():
 	$weapon.follow = null
 
 func _process(_delta):
-	hero_reward = LIVING_PUNISHMENT
+	hero_reward = living_punishment_moving
+	living_punishment_moving *= LIVING_PUNISHMENT
 	if health < 1 :
 		die()
 	elif health > MAX_HEALTH:

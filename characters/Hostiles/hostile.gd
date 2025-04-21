@@ -9,7 +9,7 @@ enum State {
 	AWAKE
 }
 
-var MAXIMUM_BOT_VELOCITY = 200
+var MAXIMUM_BOT_VELOCITY = 300
 const BOT_ACCELRATION = 1000
 const RAY_CAST_LENGTH = 50
 const HERO_DISTANCE = 200
@@ -41,7 +41,7 @@ var modifiers = []
 
 var enemy_type = ""
 var shot = false
-var SHOT_REWARD = 2
+var SHOT_REWARD = 2.5
 
 var i_wanna_be_closer_baby = 1
 
@@ -101,7 +101,7 @@ func follow(delta):
 func raycast_check():
 	var dir = Vector2.ZERO
 	#if global_position.distance_to(hero.global_position) > HERO_DISTANCE:
-	dir = global_position.direction_to(hero.global_position)
+	dir = global_position.direction_to(hero.global_position).normalized()
 	#else:
 	#	dir = hero.position.direction_to(position)
 	
@@ -111,16 +111,16 @@ func raycast_check():
 			var weight 
 			var factor = dir.dot(ray.cast_to.normalized())
 			if ray.get_collider().get_groups().has("hostile"):
-				weight = -1
+				weight =-1
 			elif ray.get_collider().get_groups().has("hero"):
-				weight = i_wanna_be_closer_baby * 3
+				weight = i_wanna_be_closer_baby * 5
 			elif ray.get_collider().get_groups().has("wall"):
-				weight = 0.5
+				weight = -1
 			else :
 				weight = 0
-			eligible_rays += ray.cast_to.normalized() * factor * weight
+			eligible_rays += ray.cast_to.normalized()  * weight
 	
-	dir +=  eligible_rays
+	dir +=  eligible_rays.normalized()
 	
 	return dir.normalized()
 

@@ -37,7 +37,7 @@ var weights = [
 var loot_generation_probability = 0.2
 
 var viable_enemies = [
-	"res://characters/Hostiles/wheel_bot/wheel_bot.tscn",
+	#"res://characters/Hostiles/wheel_bot/wheel_bot.tscn",
 	"res://characters/Hostiles/twinshot_bot/twinshot_bot.tscn",
 	"res://characters/Hostiles/gatling_bot/gatling_bot.tscn",
 	"res://characters/Hostiles/shotgun_bot/shotgun_bot.tscn"

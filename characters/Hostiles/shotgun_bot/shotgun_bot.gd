@@ -8,6 +8,7 @@ extends "res://characters/Hostiles/hostile.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	MAXIMUM_BOT_VELOCITY = 225
 	current_state = State.AWAKE
 	enemy_type = "shotgun_bot"
 	

@@ -8,6 +8,7 @@
 [ext_resource path="res://UI/Inventory/Inventory.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
 
 [node name="ROOT" type="Node2D"]
 material = SubResource( 1 )
@@ -26,7 +27,6 @@ stream = ExtResource( 3 )
 volume_db = -10.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 0.533333, 0.533333, 0.533333, 1 )
 
 [node name="TextBox" parent="." instance=ExtResource( 2 )]
 

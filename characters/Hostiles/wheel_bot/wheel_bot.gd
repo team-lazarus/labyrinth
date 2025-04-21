@@ -14,7 +14,6 @@ func _ready():
 	
 	strength = 1
 	
-	MAXIMUM_BOT_VELOCITY = 250
-	
+	MAXIMUM_BOT_VELOCITY = 150
 	#$AnimationPlayer.play("idle")
 

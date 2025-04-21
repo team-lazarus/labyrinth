@@ -16,7 +16,7 @@ var backdoor = false
 
 var current_enemies = 1
 
-const X_MAX = 800
+const X_MAX = 1000
 const Y_MAX = 400
 
 var hero_reward = 0
@@ -41,7 +41,8 @@ func _ready():
 var viable_enemies = [
 	"res://characters/Hostiles/twinshot_bot/twinshot_bot.tscn",
 	"res://characters/Hostiles/gatling_bot/gatling_bot.tscn",
-	"res://characters/Hostiles/shotgun_bot/shotgun_bot.tscn"
+	"res://characters/Hostiles/shotgun_bot/shotgun_bot.tscn",
+	"res://characters/Hostiles/wheel_bot/wheel_bot.tscn"
 	]
 
 func _process(delta):
@@ -55,6 +56,7 @@ func _process(delta):
 	if current_enemies == 0:
 		hero_reward += 5 if wave > 0 else 0
 		gun_reward += 5 if wave > 0 else 0
+		hero.heal(3 if wave >0 else 0)
 		var num_enemies = 0
 		while num_enemies < (randi()%4)+2:
 			var enemy_path = viable_enemies[randi() % viable_enemies.size()]
@@ -71,6 +73,7 @@ func _process(delta):
 			$YSort.add_child(enemy)
 			enemy.wake($YSort/hero)			
 			num_enemies += 1
+		wave += 1
 
 func cleanup():
 	for child in $YSort.get_children():
