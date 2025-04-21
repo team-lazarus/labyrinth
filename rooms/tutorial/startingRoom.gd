@@ -42,7 +42,7 @@ var viable_enemies = [
 	"res://characters/Hostiles/twinshot_bot/twinshot_bot.tscn",
 	"res://characters/Hostiles/gatling_bot/gatling_bot.tscn",
 	"res://characters/Hostiles/shotgun_bot/shotgun_bot.tscn",
-	"res://characters/Hostiles/wheel_bot/wheel_bot.tscn"
+	#"res://characters/Hostiles/wheel_bot/wheel_bot.tscn"
 	]
 
 func _process(delta):
