@@ -192,8 +192,8 @@ start_node = "Idle"
 [sub_resource type="AnimationNodeStateMachinePlayback" id=21]
 
 [sub_resource type="CapsuleShape2D" id=22]
-radius = 24.2864
-height = 46.3606
+radius = 32.0
+height = 64.0
 
 [node name="hero" type="KinematicBody2D" groups=["hero"]]
 collision_mask = 30
@@ -266,7 +266,6 @@ texture = ExtResource( 3 )
 flip_h = true
 hframes = 10
 vframes = 10
-frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 4.8, 16 )
@@ -301,7 +300,7 @@ energy = 0.8
 position = Vector2( 4.8, 31.4667 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-position = Vector2( 0, -63.4667 )
+position = Vector2( -1.8, -53.4667 )
 shape = SubResource( 22 )
 
 [node name="weapon" parent="." instance=ExtResource( 1 )]

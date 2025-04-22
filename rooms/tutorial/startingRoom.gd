@@ -58,7 +58,7 @@ func _process(delta):
 		gun_reward += 5 if wave > 0 else 0
 		hero.heal(3 if wave >0 else 0)
 		var num_enemies = 0
-		while num_enemies < (randi()%4)+2:
+		while num_enemies < (randi()%3)+1:
 			var enemy_path = viable_enemies[randi() % viable_enemies.size()]
 			var enemy = load(enemy_path).instance()
 			randomize()
