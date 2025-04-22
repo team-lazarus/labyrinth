@@ -3,8 +3,8 @@
 [ext_resource path="res://sprites/Hostiles/shotgun_bot/shotgun_new.png" type="Texture" id=1]
 [ext_resource path="res://characters/Hostiles/hostile.gd" type="Script" id=4]
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 75.0
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 62.5, 68.7501 )
 
 [sub_resource type="CapsuleShape2D" id=7]
 radius = 50.0
@@ -17,8 +17,9 @@ collision_mask = 27
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -7.10543e-12, 1.49012e-06 )
 rotation = 1.5708
-shape = SubResource( 2 )
+shape = SubResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 4, 4 )
