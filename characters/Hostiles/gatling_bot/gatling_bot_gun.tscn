@@ -22,4 +22,5 @@ texture = ExtResource( 2 )
 frame = 2
 
 [node name="bullet_exit" parent="muzzle" index="1"]
-position = Vector2( 22.1834, 0.0704575 )
+position = Vector2( 14, 0.07 )
+scale = Vector2( -15.9389, 37.7159 )

@@ -142,7 +142,7 @@ position = Vector2( 3.83449, 2.65465 )
 vframes = 6
 
 [node name="bullet_exit" type="Position2D" parent="muzzle"]
-position = Vector2( 16.8259, 0.0704575 )
+position = Vector2( 12, 0.07 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/after_shot = SubResource( 2 )
