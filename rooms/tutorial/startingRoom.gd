@@ -18,11 +18,11 @@ var backdoor = false
 
 var current_enemies = 1
 
-const X_MAX = 1024
-const Y_MAX = 880
+const X_MAX = 900
+const Y_MAX = 800
 
 const X_o = 128
-const Y_o = 256
+const Y_o = 128
 
 var hero_reward = 0
 var gun_reward = 0

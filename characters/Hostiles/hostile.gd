@@ -120,7 +120,7 @@ func raycast_check():
 				weight = 0
 			eligible_rays += ray.cast_to.normalized()  * weight
 	
-	dir +=  eligible_rays.normalized()
+	dir += 2* eligible_rays.normalized()
 	
 	return dir.normalized()
 
