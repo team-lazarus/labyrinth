@@ -18,8 +18,8 @@ var backdoor = false
 
 var current_enemies = 1
 
-const X_MAX = 1400
-const Y_MAX = 760
+const X_MAX = 1024
+const Y_MAX = 880
 
 const X_o = 128
 const Y_o = 256
