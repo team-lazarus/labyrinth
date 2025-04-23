@@ -5,19 +5,24 @@ var next_scene = "res://rooms/level1/lvl1.tscn"
 var next_next_scene = null
 onready var hero = load("res://characters/Hero/hero.tscn").instance()
 onready var label = $Label
+onready var tile_map = $TileMap
+
+onready var doors = [$door]
 
 var text_script = null
 
 onready var bullets = []
-onready var doors = []
 onready var enemies = []
 
 var backdoor = false
 
 var current_enemies = 1
 
-const X_MAX = 900
-const Y_MAX = 300
+const X_MAX = 1400
+const Y_MAX = 760
+
+const X_o = 128
+const Y_o = 256
 
 var hero_reward = 0
 var gun_reward = 0
@@ -30,11 +35,11 @@ func _ready():
 		child.queue_free()
 		
 	randomize()
-	var x = randf()*X_MAX
-	var y = 100 + randf()*Y_MAX
+	var x = X_o + randf()*X_MAX
+	var y = Y_o + randf()*Y_MAX
 	
 	var spawn = Vector2(x, y)
-	hero.position = spawn
+	hero.global_position = spawn
 	randomize()
 	$YSort.add_child(hero)
 
@@ -63,17 +68,24 @@ func _process(delta):
 			var enemy = load(enemy_path).instance()
 			randomize()
 			
-			var x = randf()*X_MAX
-			var y = 100 + randf()*Y_MAX
+			var x = X_o + randf()*X_MAX
+			var y = Y_o + randf()*Y_MAX
 			
 			var spawn = Vector2(x, y)
 			randomize()
-			enemy.position = spawn
+			enemy.global_position = spawn
 			enemy.level = self
 			$YSort.add_child(enemy)
-			enemy.wake($YSort/hero)			
+			enemy.wake($YSort/hero)
 			num_enemies += 1
 		wave += 1
+
+func get_enemies():
+	var enemies = []
+	for child in $YSort.get_children():
+		if child is KinematicBody2D and not child.name.begins_with("hero"):
+			enemies.append(child)
+	return enemies
 
 func cleanup():
 	for child in $YSort.get_children():

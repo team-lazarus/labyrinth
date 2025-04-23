@@ -9,7 +9,7 @@ enum State {
 	AWAKE
 }
 
-var MAXIMUM_BOT_VELOCITY = 300
+var MAXIMUM_BOT_VELOCITY = 270
 const BOT_ACCELRATION = 1000
 const RAY_CAST_LENGTH = 50
 const HERO_DISTANCE = 200
@@ -39,7 +39,7 @@ var init_done = false
 
 var modifiers = []
 
-var enemy_type = ""
+var enemy_type = -1
 var shot = false
 var SHOT_REWARD = 2.5
 

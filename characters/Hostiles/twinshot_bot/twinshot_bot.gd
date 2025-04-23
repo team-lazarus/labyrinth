@@ -8,7 +8,7 @@ extends "res://characters/Hostiles/hostile.gd"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	MAXIMUM_BOT_VELOCITY = 50
-	enemy_type = "sniper_bot"
+	enemy_type = 1
 	i_wanna_be_closer_baby = -1
 	
 	rays.resize(num_rays)

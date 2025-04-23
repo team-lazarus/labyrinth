@@ -1,7 +1,7 @@
 extends "res://characters/Hostiles/hostile.gd"
 
 func _ready():
-	enemy_type = "wheel_bot"
+	enemy_type = 0
 	
 	rays.resize(num_rays)
 	for itr in range(num_rays):

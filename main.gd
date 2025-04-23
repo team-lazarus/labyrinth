@@ -13,6 +13,8 @@ var previous_enemies = -1
 var current_gun_reward = 0
 var current_hero_reward = 0
 
+const tile_size = 128
+
 func _ready():
 	start_server()
 	
@@ -160,7 +162,7 @@ func extract_state_from_node(node):
 		gun_reward += dead_enemies*2
 		#print("dead enemy")
 	previous_enemies = len(node.enemies)
-	for enemy in node.enemies:
+	for enemy in node.get_enemies():
 		if enemy.shot:
 			#print("shot enemy")
 			enemy.shot = false
@@ -190,7 +192,7 @@ func extract_state_from_node(node):
 		"doors" : door_data,
 		"enemy" : enemy_data,
 		"backdoor" : backdoor_data,
-		"walls" : []
+		"walls" : get_wall_data(node)
 	}
 	if node.hero.terminated:
 		var level = current_level
@@ -203,6 +205,22 @@ func extract_state_from_node(node):
 		current_level = level
 		add_child(level)
 	return next_state_data
+
+func get_wall_data(node):
+	var wall_data = []
+	for tile in node.tile_map.get_used_cells_by_id(0):
+		var x_1 = (tile.x - 0.5) * tile_size
+		var x_2 = (tile.x + 0.5) * tile_size
+		var y_1 = (tile.y - 0.5) * tile_size
+		var y_2 = (tile.y + 0.5) * tile_size
+		wall_data.append([x_1, y_1, x_2, y_2]) 
+	for tile in node.tile_map.get_used_cells_by_id(3):
+		var x_1 = (tile.x - 0.5) * tile_size
+		var x_2 = (tile.x + 0.5) * tile_size
+		var y_1 = (tile.y - 0.5) * tile_size
+		var y_2 = (tile.y + 0.5) * tile_size
+		wall_data.append([x_1, y_1, x_2, y_2])
+	return wall_data
 
 func execute_actions(response):
 	var parse_result = JSON.parse(response)

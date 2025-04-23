@@ -10,7 +10,7 @@ extends "res://characters/Hostiles/hostile.gd"
 func _ready():
 	MAXIMUM_BOT_VELOCITY = 225
 	current_state = State.AWAKE
-	enemy_type = "shotgun_bot"
+	enemy_type = 2
 	
 	rays.resize(num_rays)
 	for itr in range(num_rays):
