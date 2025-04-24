@@ -153,7 +153,7 @@ func extract_state_from_node(node):
 		pass
 		#print("finish")
 	var gun_reward = rewards[1] + node.gun_reward
-	var hero_reward = rewards[0] + node.hero_reward + node.gun_reward
+	var hero_reward = rewards[0] + node.hero_reward
 	node.hero_reward = 0
 	node.gun_reward = 0
 	var dead_enemies = 0

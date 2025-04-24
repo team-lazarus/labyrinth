@@ -6,6 +6,7 @@ var next_next_scene = null
 onready var hero = load("res://characters/Hero/hero.tscn").instance()
 onready var label = $Label
 onready var tile_map = $TileMap
+onready var stale_timer = $StaleTimer
 
 onready var doors = [$door]
 
@@ -78,6 +79,7 @@ func _process(delta):
 			$YSort.add_child(enemy)
 			enemy.wake($YSort/hero)
 			num_enemies += 1
+			stale_timer.start()
 		wave += 1
 
 func get_enemies():
@@ -92,3 +94,7 @@ func cleanup():
 		remove_child(child)
 		child.queue_free()
 		
+
+
+func _on_StaleTimer_timeout():
+	hero.deal_damage(10)

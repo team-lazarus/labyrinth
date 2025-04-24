@@ -25,3 +25,9 @@ color = Color( 0.160784, 0.0901961, 0.996078, 1 )
 visible = false
 position = Vector2( 592, 296 )
 color = Color( 0.160784, 0.0901961, 0.996078, 1 )
+
+[node name="StaleTimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+
+[connection signal="timeout" from="StaleTimer" to="." method="_on_StaleTimer_timeout"]
