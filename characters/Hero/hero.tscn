@@ -272,9 +272,6 @@ position = Vector2( 4.8, 16 )
 rotation = 1.5708
 shape = SubResource( 3 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/basic_run = SubResource( 4 )
 anims/idle = SubResource( 5 )

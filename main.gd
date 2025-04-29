@@ -189,7 +189,7 @@ func extract_state_from_node(node):
 			"shoot_cooldown" : 0.0 #TODO: check if ability is ready
 		},
 		"bullets" : bullet_data,
-		"doors" : door_data,
+		"doors" : [],#door_data,
 		"enemy" : enemy_data,
 		"backdoor" : backdoor_data,
 		"walls" : get_wall_data(node)

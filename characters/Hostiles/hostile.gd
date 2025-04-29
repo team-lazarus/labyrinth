@@ -115,12 +115,12 @@ func raycast_check():
 			elif ray.get_collider().get_groups().has("hero"):
 				weight = i_wanna_be_closer_baby * 5
 			elif ray.get_collider().get_groups().has("wall"):
-				weight = -1
+				weight = -0.5
 			else :
 				weight = 0
 			eligible_rays += ray.cast_to.normalized()  * weight
 	
-	dir += 2* eligible_rays.normalized()
+	dir += eligible_rays.normalized()
 	
 	return dir.normalized()
 
