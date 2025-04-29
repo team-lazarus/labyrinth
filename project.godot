@@ -34,6 +34,7 @@ window/stretch/aspect="expand"
 [global]
 
 FPS=false
+background=false
 
 [importer_defaults]
 
@@ -76,6 +77,6 @@ texture={
 [rendering]
 
 2d/snapping/use_gpu_pixel_snap=true
-environment/default_clear_color=Color( 0.0941176, 0.0784314, 0.145098, 1 )
+environment/default_clear_color=Color( 0, 0, 0, 1 )
 environment/default_environment="res://default_env.tres"
 quality/2d/use_pixel_snap=true
