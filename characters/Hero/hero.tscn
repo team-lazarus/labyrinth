@@ -266,6 +266,7 @@ texture = ExtResource( 3 )
 flip_h = true
 hframes = 10
 vframes = 10
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 4.8, 16 )
@@ -406,6 +407,7 @@ cast_to = Vector2( 0, 304 )
 collision_mask = 2
 
 [node name="Label" type="Label" parent="."]
+visible = false
 margin_left = -192.0
 margin_top = -272.0
 margin_right = 138.0
