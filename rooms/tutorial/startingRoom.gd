@@ -35,13 +35,13 @@ func _ready():
 		remove_child(child)
 		child.queue_free()
 		
-	randomize()
+	#randomize()
 	var x = X_o + randf()*X_MAX
 	var y = Y_o + randf()*Y_MAX
 	
 	var spawn = Vector2(x, y)
 	hero.global_position = spawn
-	randomize()
+	#randomize()
 	$YSort.add_child(hero)
 
 var viable_enemies = [
@@ -53,6 +53,7 @@ var viable_enemies = [
 
 func _process(delta):
 	current_enemies = -1
+	seed(72)
 	# - 1 for hero
 	for child in $YSort.get_children():
 		if child is KinematicBody2D:
@@ -67,13 +68,13 @@ func _process(delta):
 		while num_enemies < (randi()%3)+1:
 			var enemy_path = viable_enemies[randi() % viable_enemies.size()]
 			var enemy = load(enemy_path).instance()
-			randomize()
+			#randomize()
 			
 			var x = X_o + randf()*X_MAX
 			var y = Y_o + randf()*Y_MAX
 			
 			var spawn = Vector2(x, y)
-			randomize()
+			#randomize()
 			enemy.global_position = spawn
 			enemy.level = self
 			$YSort.add_child(enemy)
