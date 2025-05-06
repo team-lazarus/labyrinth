@@ -19,11 +19,11 @@ var backdoor = false
 
 var current_enemies = 1
 
-const X_MAX = 900
-const Y_MAX = 800
+const X_MAX = 1380
+const Y_MAX = 320
 
-const X_o = 128
-const Y_o = 128
+const X_o = -96
+const Y_o = 1072
 
 var hero_reward = 0
 var gun_reward = 0
@@ -39,7 +39,7 @@ func _ready():
 	var x = X_o + randf()*X_MAX
 	var y = Y_o + randf()*Y_MAX
 	
-	var spawn = Vector2(x, y)
+	var spawn = Vector2(640, 640)
 	hero.global_position = spawn
 	#randomize()
 	$YSort.add_child(hero)

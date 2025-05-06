@@ -266,7 +266,6 @@ texture = ExtResource( 3 )
 flip_h = true
 hframes = 10
 vframes = 10
-frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 4.8, 16 )
@@ -416,3 +415,7 @@ rect_scale = Vector2( 2, 2 )
 text = "hero_reward=
 gun_reward="
 align = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 1.5, 1.5 )
