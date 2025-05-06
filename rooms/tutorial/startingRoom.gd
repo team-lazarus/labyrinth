@@ -15,6 +15,11 @@ var text_script = null
 onready var bullets = []
 onready var enemies = []
 
+var positions = [
+	Vector2(64,1118),
+	Vector2(720, 1328)
+]
+
 var backdoor = false
 
 var current_enemies = 1
@@ -65,7 +70,7 @@ func _process(delta):
 		gun_reward += 5 if wave > 0 else 0
 		hero.heal(3 if wave >0 else 0)
 		var num_enemies = 0
-		while num_enemies < (randi()%3)+1:
+		for position in positions:
 			var enemy_path = viable_enemies[randi() % viable_enemies.size()]
 			var enemy = load(enemy_path).instance()
 			#randomize()
@@ -73,7 +78,7 @@ func _process(delta):
 			var x = X_o + randf()*X_MAX
 			var y = Y_o + randf()*Y_MAX
 			
-			var spawn = Vector2(x, y)
+			var spawn = position
 			#randomize()
 			enemy.global_position = spawn
 			enemy.level = self

@@ -77,7 +77,7 @@ func _process(_delta):
 	if tcp_server.is_listening():
 		# Check for new connections
 		if tcp_server.is_connection_available():
-			Engine.time_scale = 10
+			Engine.time_scale = 1
 			var new_peer = tcp_server.take_connection()
 			peer_connections.append(new_peer)
 			print("[INFO] New client connected")
